@@ -14,6 +14,8 @@ const domElements = {
   imagePreview: document.getElementById('image-preview'),
   analyzeBtn: document.getElementById('analyze-btn'),
   startWebcamBtn: document.getElementById('start-webcam-btn'),
+  switchCameraBtn: document.getElementById('switch-camera-btn'),
+  flashBtn: document.getElementById('flash-btn'),
   labelContainer: document.getElementById('label-container'),
   webcamContainer: document.getElementById('webcam-container')
 };
@@ -24,7 +26,11 @@ const appState = {
   webcam: null,
   maxPredictions: 0,
   isWebcamActive: false,
-  isModelLoaded: false
+  isModelLoaded: false,
+  currentCamera: 'environment', // 'environment' (traseira) ou 'user' (frontal)
+  isFlashOn: false,
+  stream: null,
+  track: null
 };
 
 // =============================================
@@ -95,6 +101,16 @@ function setupEventListeners() {
   // Controle da webcam
   if (domElements.startWebcamBtn) {
     domElements.startWebcamBtn.addEventListener('click', toggleWebcam);
+  }
+  
+  // Alternar câmera
+  if (domElements.switchCameraBtn) {
+    domElements.switchCameraBtn.addEventListener('click', switchCamera);
+  }
+  
+  // Controle do flash
+  if (domElements.flashBtn) {
+    domElements.flashBtn.addEventListener('click', toggleFlash);
   }
   
   // Parar webcam ao sair da página
@@ -221,18 +237,28 @@ async function startWebcam() {
   try {
     clearResults();
 
-    const flip = true;
+    const constraints = {
+      video: {
+        facingMode: appState.currentCamera,
+        width: { ideal: 1280 },
+        height: { ideal: 720 }
+      }
+    };
+
+    // Obter stream da câmera
+    appState.stream = await navigator.mediaDevices.getUserMedia(constraints);
+    appState.track = appState.stream.getVideoTracks()[0];
+    
+    // Configurar a webcam do Teachable Machine
+    const flip = appState.currentCamera === 'user'; // Flip apenas para câmera frontal
     appState.webcam = new tmImage.Webcam(400, 400, flip);
     
-    // Tentar configurar a webcam
-    await appState.webcam.setup();
+    // Usar nosso stream personalizado
+    appState.webcam.webcam = document.createElement('video');
+    appState.webcam.webcam.srcObject = appState.stream;
+    appState.webcam.webcam.playsInline = true;
+    appState.webcam.webcam.play();
     
-    // Verificar se o stream foi configurado corretamente
-    if (!appState.webcam.webcam) {
-      throw new Error('A câmera não foi encontrada ou não foi possível iniciar a captura.');
-    }
-    
-    await appState.webcam.play();
     appState.isWebcamActive = true;
 
     if (domElements.webcamContainer) {
@@ -251,6 +277,74 @@ async function startWebcam() {
       alert('Erro ao acessar a câmera: ' + error.message);
     }
     await stopWebcam();
+  }
+}
+
+async function switchCamera() {
+  try {
+    if (!appState.isWebcamActive) return;
+    
+    // Alternar entre câmera frontal e traseira
+    appState.currentCamera = appState.currentCamera === 'user' ? 'environment' : 'user';
+    
+    // Atualizar o ícone do botão
+    updateCameraButton();
+    
+    // Reiniciar a webcam com a nova câmera
+    await stopWebcam();
+    await startWebcam();
+  } catch (error) {
+    console.error('Erro ao alternar câmera:', error);
+    alert('Erro ao alternar câmera: ' + error.message);
+  }
+}
+
+function updateCameraButton() {
+  if (domElements.switchCameraBtn) {
+    if (appState.currentCamera === 'user') {
+      domElements.switchCameraBtn.innerHTML = '<i class="fas fa-camera-retro"></i> Câmera Traseira';
+    } else {
+      domElements.switchCameraBtn.innerHTML = '<i class="fas fa-camera-retro"></i> Câmera Frontal';
+    }
+  }
+}
+
+async function toggleFlash() {
+  try {
+    if (!appState.isWebcamActive || !appState.track) return;
+    
+    // Verificar se o flash é suportado
+    const capabilities = appState.track.getCapabilities();
+    if (!capabilities.torch) {
+      alert('Flash não é suportado nesta câmera');
+      return;
+    }
+    
+    // Alternar estado do flash
+    appState.isFlashOn = !appState.isFlashOn;
+    
+    // Aplicar configuração do flash
+    await appState.track.applyConstraints({
+      advanced: [{ torch: appState.isFlashOn }]
+    });
+    
+    // Atualizar o botão do flash
+    updateFlashButton();
+  } catch (error) {
+    console.error('Erro ao controlar flash:', error);
+    alert('Erro ao controlar flash: ' + error.message);
+  }
+}
+
+function updateFlashButton() {
+  if (domElements.flashBtn) {
+    if (appState.isFlashOn) {
+      domElements.flashBtn.innerHTML = '<i class="fas fa-lightbulb"></i> Desligar Flash';
+      domElements.flashBtn.classList.add('active');
+    } else {
+      domElements.flashBtn.innerHTML = '<i class="fas fa-lightbulb"></i> Ligar Flash';
+      domElements.flashBtn.classList.remove('active');
+    }
   }
 }
 
@@ -281,15 +375,36 @@ async function predictWebcam() {
 
 async function stopWebcam() {
   try {
-    if (appState.webcam && appState.webcam.webcam) {
+    // Desligar o flash se estiver ligado
+    if (appState.isFlashOn && appState.track) {
+      appState.isFlashOn = false;
+      await appState.track.applyConstraints({
+        advanced: [{ torch: false }]
+      });
+    }
+    
+    // Parar a webcam do Teachable Machine
+    if (appState.webcam) {
       await appState.webcam.stop();
       appState.webcam = null;
     }
+    
+    // Parar o stream de mídia
+    if (appState.stream) {
+      appState.stream.getTracks().forEach(track => track.stop());
+      appState.stream = null;
+      appState.track = null;
+    }
+    
     appState.isWebcamActive = false;
     
     if (domElements.webcamContainer) {
       domElements.webcamContainer.innerHTML = '';
     }
+    
+    // Atualizar botões
+    updateWebcamButton(false);
+    updateFlashButton();
   } catch (error) {
     console.error('Erro ao parar webcam:', error);
     throw error;
