@@ -201,6 +201,32 @@ header.scrolled {
     line-height: 1.2;
 }
 
+ .camera-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    justify-content: center;
+}
+.camera-controls button {
+    padding: 8px 12px;
+    border-radius: 4px;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.camera-controls button.active {
+    background: #4CAF50;
+    color: white;
+}
+
+.camera-controls button i {
+            font-size: 14px;
+}
+
 .hero p {
     font-size: 20px;
     margin-bottom: 40px;
