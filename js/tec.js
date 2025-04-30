@@ -38,12 +38,30 @@ const appState = {
 // =============================================
 document.addEventListener('DOMContentLoaded', async () => {
   try {
+    // Verificar suporte a APIs necessárias
+    checkBrowserCompatibility();
+    
     await initializeApp();
     console.log('Aplicativo inicializado com sucesso!');
   } catch (error) {
     handleInitializationError(error);
   }
 });
+
+function checkBrowserCompatibility() {
+  // Verificar se o navegador suporta a API de mídia
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    const errorMsg = 'Seu navegador não suporta acesso à câmera ou está bloqueado.';
+    console.error(errorMsg);
+    alert(errorMsg);
+    
+    if (domElements.startWebcamBtn) domElements.startWebcamBtn.disabled = true;
+    if (domElements.switchCameraBtn) domElements.switchCameraBtn.disabled = true;
+    if (domElements.flashBtn) domElements.flashBtn.disabled = true;
+    
+    throw new Error(errorMsg);
+  }
+}
 
 async function initializeApp() {
   // Carregar modelo de IA
@@ -66,15 +84,21 @@ function handleInitializationError(error) {
 // =============================================
 async function loadModel() {
   try {
+    showLoading(true, 'Carregando modelo de IA...');
+    
     const modelURL = MODEL_URL + "model.json";
     const metadataURL = MODEL_URL + "metadata.json";
     
     appState.model = await tmImage.load(modelURL, metadataURL);
     appState.maxPredictions = appState.model.getTotalClasses();
     appState.isModelLoaded = true;
+    
+    console.log('Modelo carregado com sucesso!');
   } catch (error) {
     console.error('Erro ao carregar o modelo:', error);
     throw new Error('Não foi possível carregar o modelo de IA');
+  } finally {
+    showLoading(false);
   }
 }
 
@@ -115,6 +139,15 @@ function setupEventListeners() {
   
   // Parar webcam ao sair da página
   window.addEventListener('beforeunload', stopWebcam);
+  
+  // Verificar quando o container da webcam é clicado para focar
+  if (domElements.webcamContainer) {
+    domElements.webcamContainer.addEventListener('click', () => {
+      if (appState.webcam && appState.webcam.canvas) {
+        appState.webcam.canvas.focus();
+      }
+    });
+  }
 }
 
 function initLabelContainer() {
@@ -167,6 +200,12 @@ function handleImageUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
 
+    // Verificar tipo de arquivo
+    if (!file.type.match('image.*')) {
+      alert('Por favor, selecione um arquivo de imagem válido.');
+      return;
+    }
+
     const reader = new FileReader();
     
     reader.onload = function(e) {
@@ -189,7 +228,7 @@ function handleImageUpload(event) {
 async function analyzeUploadedImage() {
   try {
     validateAnalysisPreconditions();
-    showLoading(true);
+    showLoading(true, 'Analisando imagem...');
     
     const prediction = await appState.model.predict(domElements.imagePreview);
     displayPredictions(prediction);
@@ -202,11 +241,11 @@ async function analyzeUploadedImage() {
 
 function validateAnalysisPreconditions() {
   if (!appState.isModelLoaded) {
-    throw new Error('Modelo não carregado');
+    throw new Error('Modelo de IA não foi carregado corretamente');
   }
   
   if (!domElements.imagePreview.src || domElements.imagePreview.src === '#') {
-    throw new Error('Nenhuma imagem selecionada');
+    throw new Error('Nenhuma imagem selecionada para análise');
   }
 }
 
@@ -236,6 +275,7 @@ async function toggleWebcam() {
 async function startWebcam() {
   try {
     clearResults();
+    showLoading(true, 'Iniciando câmera...');
 
     const constraints = {
       video: {
@@ -253,30 +293,67 @@ async function startWebcam() {
     const flip = appState.currentCamera === 'user'; // Flip apenas para câmera frontal
     appState.webcam = new tmImage.Webcam(400, 400, flip);
     
-    // Usar nosso stream personalizado
-    appState.webcam.webcam = document.createElement('video');
-    appState.webcam.webcam.srcObject = appState.stream;
-    appState.webcam.webcam.playsInline = true;
-    appState.webcam.webcam.play();
+    // Configurar o canvas antes de adicionar ao DOM
+    await appState.webcam.setup(constraints); // Usar as mesmas constraints
     
+    if (!appState.webcam.canvas) {
+      throw new Error('Canvas da webcam não foi criado corretamente');
+    }
+
     appState.isWebcamActive = true;
 
     if (domElements.webcamContainer) {
+      // Limpar o container antes de adicionar
       domElements.webcamContainer.innerHTML = '';
-      domElements.webcamContainer.appendChild(appState.webcam.canvas);
+      
+      // Verificar se o canvas existe antes de adicionar
+      if (appState.webcam.canvas instanceof HTMLCanvasElement) {
+        domElements.webcamContainer.appendChild(appState.webcam.canvas);
+      } else {
+        throw new Error('Elemento canvas não é válido');
+      }
     }
     
+    // Atualizar controles da câmera
+    updateCameraButton();
+    updateFlashButton();
+    
+    // Verificar suporte a flash
+    checkFlashSupport();
+    
+    // Iniciar o loop de previsão
     window.requestAnimationFrame(webcamLoop);
   } catch (error) {
     console.error('Erro ao iniciar webcam:', error);
+    
+    let errorMessage = 'Erro ao acessar a câmera: ';
     if (error.name === 'NotAllowedError') {
-      alert('Acesso à câmera foi negado. Por favor, permita o acesso à câmera.');
+      errorMessage += 'Permissão negada. Por favor, permita o acesso à câmera.';
     } else if (error.name === 'NotFoundError') {
-      alert('Câmera não encontrada. Certifique-se de que um dispositivo de câmera está conectado.');
+      errorMessage += 'Nenhuma câmera encontrada.';
+    } else if (error.message.includes('canvas')) {
+      errorMessage += 'Problema ao configurar a visualização da câmera.';
     } else {
-      alert('Erro ao acessar a câmera: ' + error.message);
+      errorMessage += error.message;
     }
+    
+    displayErrorMessage(errorMessage);
     await stopWebcam();
+  } finally {
+    showLoading(false);
+  }
+}
+
+function checkFlashSupport() {
+  if (!appState.track || !domElements.flashBtn) return;
+  
+  const capabilities = appState.track.getCapabilities();
+  if (!capabilities.torch) {
+    domElements.flashBtn.disabled = true;
+    domElements.flashBtn.title = 'Flash não suportado nesta câmera';
+  } else {
+    domElements.flashBtn.disabled = false;
+    domElements.flashBtn.title = '';
   }
 }
 
@@ -284,18 +361,19 @@ async function switchCamera() {
   try {
     if (!appState.isWebcamActive) return;
     
+    showLoading(true, 'Alternando câmera...');
+    
     // Alternar entre câmera frontal e traseira
     appState.currentCamera = appState.currentCamera === 'user' ? 'environment' : 'user';
-    
-    // Atualizar o ícone do botão
-    updateCameraButton();
     
     // Reiniciar a webcam com a nova câmera
     await stopWebcam();
     await startWebcam();
   } catch (error) {
     console.error('Erro ao alternar câmera:', error);
-    alert('Erro ao alternar câmera: ' + error.message);
+    displayErrorMessage('Erro ao alternar câmera: ' + error.message);
+  } finally {
+    showLoading(false);
   }
 }
 
@@ -328,11 +406,12 @@ async function toggleFlash() {
       advanced: [{ torch: appState.isFlashOn }]
     });
     
-    // Atualizar o botão do flash
-    updateFlashButton();
+    console.log(`Flash ${appState.isFlashOn ? 'ligado' : 'desligado'}`);
   } catch (error) {
     console.error('Erro ao controlar flash:', error);
-    alert('Erro ao controlar flash: ' + error.message);
+    displayErrorMessage('Erro ao controlar flash: ' + error.message);
+  } finally {
+    updateFlashButton();
   }
 }
 
@@ -351,6 +430,11 @@ function updateFlashButton() {
 async function webcamLoop() {
   try {
     if (appState.isWebcamActive && appState.webcam) {
+      // Verificar se o canvas ainda está no DOM
+      if (!document.body.contains(appState.webcam.canvas)) {
+        throw new Error('Canvas da webcam foi removido do DOM');
+      }
+      
       appState.webcam.update();
       await predictWebcam();
       window.requestAnimationFrame(webcamLoop);
@@ -358,6 +442,7 @@ async function webcamLoop() {
   } catch (error) {
     console.error('Erro no webcam loop:', error);
     await stopWebcam();
+    displayErrorMessage('Erro na câmera: ' + error.message);
   }
 }
 
@@ -375,23 +460,39 @@ async function predictWebcam() {
 
 async function stopWebcam() {
   try {
+    showLoading(true, 'Parando câmera...');
+    
     // Desligar o flash se estiver ligado
     if (appState.isFlashOn && appState.track) {
       appState.isFlashOn = false;
-      await appState.track.applyConstraints({
-        advanced: [{ torch: false }]
-      });
+      try {
+        await appState.track.applyConstraints({
+          advanced: [{ torch: false }]
+        });
+      } catch (error) {
+        console.error('Erro ao desligar flash:', error);
+      }
     }
     
     // Parar a webcam do Teachable Machine
     if (appState.webcam) {
-      await appState.webcam.stop();
+      try {
+        await appState.webcam.stop();
+      } catch (error) {
+        console.error('Erro ao parar webcam:', error);
+      }
       appState.webcam = null;
     }
     
     // Parar o stream de mídia
     if (appState.stream) {
-      appState.stream.getTracks().forEach(track => track.stop());
+      appState.stream.getTracks().forEach(track => {
+        try {
+          track.stop();
+        } catch (error) {
+          console.error('Erro ao parar track:', error);
+        }
+      });
       appState.stream = null;
       appState.track = null;
     }
@@ -408,6 +509,8 @@ async function stopWebcam() {
   } catch (error) {
     console.error('Erro ao parar webcam:', error);
     throw error;
+  } finally {
+    showLoading(false);
   }
 }
 
@@ -454,11 +557,20 @@ function validatePredictionsContainer() {
 function renderPredictions(predictions) {
   domElements.labelContainer.innerHTML = '';
   
-  predictions.forEach(pred => {
-    if (pred.probability > 0.01) {
-      const predictionElement = createPredictionElement(pred);
-      domElements.labelContainer.appendChild(predictionElement);
-    }
+  // Mostrar apenas as previsões com probabilidade significativa
+  const filteredPredictions = predictions.filter(pred => pred.probability > 0.01);
+  
+  if (filteredPredictions.length === 0) {
+    const noResults = document.createElement('div');
+    noResults.className = 'no-results';
+    noResults.textContent = 'Nenhum material reciclável identificado com confiança suficiente.';
+    domElements.labelContainer.appendChild(noResults);
+    return;
+  }
+  
+  filteredPredictions.forEach(pred => {
+    const predictionElement = createPredictionElement(pred);
+    domElements.labelContainer.appendChild(predictionElement);
   });
 }
 
@@ -504,17 +616,45 @@ function clearResults() {
   }
 }
 
-function showLoading(isLoading) {
-  const loadingElement = document.getElementById('loading');
-  if (loadingElement) {
-    loadingElement.style.display = isLoading ? 'block' : 'none';
+function showLoading(isLoading, message = '') {
+  // Criar ou atualizar elemento de loading
+  let loadingElement = document.getElementById('loading-overlay');
+  
+  if (isLoading) {
+    if (!loadingElement) {
+      loadingElement = document.createElement('div');
+      loadingElement.id = 'loading-overlay';
+      loadingElement.innerHTML = `
+        <div class="loading-content">
+          <div class="spinner"></div>
+          <p>${message || 'Processando...'}</p>
+        </div>
+      `;
+      document.body.appendChild(loadingElement);
+    } else {
+      loadingElement.querySelector('p').textContent = message || 'Processando...';
+    }
+    loadingElement.style.display = 'flex';
+  } else if (loadingElement) {
+    loadingElement.style.display = 'none';
   }
 }
 
 function displayErrorMessage(message) {
-  const errorMessageContainer = document.getElementById('error-message');
-  if (errorMessageContainer) {
-    errorMessageContainer.textContent = message;
-    errorMessageContainer.style.display = 'block';
+  // Criar ou atualizar elemento de erro
+  let errorElement = document.getElementById('error-message');
+  
+  if (!errorElement) {
+    errorElement = document.createElement('div');
+    errorElement.id = 'error-message';
+    document.body.appendChild(errorElement);
   }
+  
+  errorElement.textContent = message;
+  errorElement.style.display = 'block';
+  
+  // Esconder após 5 segundos
+  setTimeout(() => {
+    errorElement.style.display = 'none';
+  }, 5000);
 }
