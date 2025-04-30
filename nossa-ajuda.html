@@ -36,46 +36,54 @@
     </header>
 
     <section class="ai-section">
-        <div class="container">
-            <h2>Identificador de Materiais Recicláveis</h2>
-            <p class="subtitle">Use nossa inteligência artificial para identificar materiais recicláveis. Escolha entre enviar uma imagem ou usar sua câmera.</p>
-            
-            <div class="ai-controls">
-                <div class="input-options">
-                    <button type="button" id="webcam-btn" class="btn-option active">
-                        <i class="fas fa-camera"></i> Usar Câmera
-                    </button>
-                    <button type="button" id="upload-btn" class="btn-option">
-                        <i class="fas fa-upload"></i> Enviar Imagem
-                    </button>
-                </div>
-                
-                <div id="upload-section" class="hidden">
-                    <input type="file" id="image-upload" accept="image/*" class="file-input">
-                    <label for="image-upload" class="upload-label">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <span>Selecione uma imagem</span>
-                    </label>
-                </div>
-                
-                <div id="webcam-section">
-					<button type="button" onclick="startWebcam()" class="start-btn">
-						<i class="fas fa-play"></i> Iniciar Câmera
-					</button>
-                   <div id="webcam-container"></div>
-                </div>
-                
-                <div id="image-preview-container" class="hidden">
-                    <img id="image-preview" src="#" alt="Preview da imagem enviada">
-                    <button type="button" id="analyze-btn" class="start-btn">
-                        <i class="fas fa-search"></i> Analisar Imagem
-                    </button>
-                </div>
+    <div class="container">
+        <h2>Identificador de Materiais Recicláveis</h2>
+        <p class="subtitle">Use nossa inteligência artificial para identificar materiais recicláveis. Escolha entre enviar uma imagem ou usar sua câmera.</p>
+        
+        <div class="ai-controls">
+            <div class="input-options">
+                <button type="button" id="webcam-btn" class="btn-option active">
+                    <i class="fas fa-camera"></i> Usar Câmera
+                </button>
+                <button type="button" id="upload-btn" class="btn-option">
+                    <i class="fas fa-upload"></i> Enviar Imagem
+                </button>
             </div>
             
-            <div id="label-container"></div>
+            <div id="upload-section" class="hidden">
+                <input type="file" id="image-upload" accept="image/*" class="file-input">
+                <label for="image-upload" class="upload-label">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span>Selecione uma imagem</span>
+                </label>
+            </div>
+            
+            <div id="webcam-section">
+                <div class="webcam-controls">
+                    <button type="button" id="start-webcam-btn" class="start-btn">
+                        <i class="fas fa-play"></i> Iniciar Câmera
+                    </button>
+                    <button type="button" id="switch-camera-btn" class="control-btn" disabled>
+                        <i class="fas fa-camera-retro"></i> Alternar Câmera
+                    </button>
+                    <button type="button" id="flash-btn" class="control-btn" disabled>
+                        <i class="fas fa-lightbulb"></i> Flash
+                    </button>
+                </div>
+                <div id="webcam-container"></div>
+            </div>
+            
+            <div id="image-preview-container" class="hidden">
+                <img id="image-preview" src="#" alt="Preview da imagem enviada">
+                <button type="button" id="analyze-btn" class="start-btn">
+                    <i class="fas fa-search"></i> Analisar Imagem
+                </button>
+            </div>
         </div>
-    </section>
+        
+        <div id="label-container"></div>
+    </div>
+</section>
 
     <script src="js/tec.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
