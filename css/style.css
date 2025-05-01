@@ -210,7 +210,7 @@ header.scrolled {
 .camera-controls button {
     padding: 8px 12px;
     border-radius: 4px;
-    background: #f0f0f0;
+    background: #4CAF50;
     border: 1px solid #ddd;
     cursor: pointer;
     display: flex;
