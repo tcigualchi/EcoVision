@@ -301,68 +301,95 @@ async function checkCameraPermissions() {
 }
 
 async function startWebcam() {
-    try {
-        clearResults();
-        showLoading(true, 'Iniciando câmera...');
+  try {
+      clearResults();
+      showLoading(true, 'Iniciando câmera...');
 
-        // Verificar dispositivos disponíveis
-        const devices = await navigator.mediaDevices.enumerateDevices();
-        const videoDevices = devices.filter(device => device.kind === 'videoinput');
-        
-        if (videoDevices.length === 0) {
-            throw new Error('Nenhuma câmera encontrada no dispositivo');
-        }
+      // Mostrar mensagem enquanto a câmera carrega
+      domElements.webcamContainer.innerHTML = '<div class="camera-loading">Iniciando câmera...</div>';
 
-        // Configurações iniciais
-        let constraints = {
-            video: {
-                facingMode: appState.currentCamera,
-                width: { ideal: 1280 },
-                height: { ideal: 720 }
-            }
-        };
+      // Configurações da câmera
+      const constraints = {
+          video: {
+              facingMode: appState.currentCamera,
+              width: { ideal: 1280 },
+              height: { ideal: 720 }
+          }
+      };
 
-        // Tentar obter o stream com fallback para configurações mais simples
-        try {
-            appState.stream = await navigator.mediaDevices.getUserMedia(constraints);
-        } catch (err) {
-            console.warn('Usando fallback para configurações mais simples de câmera');
-            constraints.video = { facingMode: appState.currentCamera };
-            appState.stream = await navigator.mediaDevices.getUserMedia(constraints);
-        }
+      // Obter stream da câmera
+      appState.stream = await navigator.mediaDevices.getUserMedia(constraints);
+      appState.track = appState.stream.getVideoTracks()[0];
+      
+      // Configurar a webcam
+      const flip = appState.currentCamera === 'user';
+      appState.webcam = new tmImage.Webcam(500, 375, flip); // Largura e altura fixas
+      
+      // Setup com as constraints reais
+      await appState.webcam.setup({
+          video: {
+              deviceId: appState.track.getSettings().deviceId,
+              width: { ideal: 500 },
+              height: { ideal: 375 }
+          }
+      });
 
-        appState.track = appState.stream.getVideoTracks()[0];
-        
-        // Configurar a webcam do Teachable Machine
-        const flip = appState.currentCamera === 'user';
-        appState.webcam = new tmImage.Webcam(400, 400, flip);
-        
-        await appState.webcam.setup(constraints);
-        
-        if (!appState.webcam.canvas) {
-            throw new Error('Canvas da webcam não foi criado corretamente');
-        }
+      // Verificar se o canvas foi criado
+      if (!appState.webcam.canvas) {
+          throw new Error('Não foi possível criar a visualização da câmera');
+      }
 
-        appState.isWebcamActive = true;
+      appState.isWebcamActive = true;
 
-        // Limpar e adicionar canvas ao container
-        domElements.webcamContainer.innerHTML = '';
-        domElements.webcamContainer.appendChild(appState.webcam.canvas);
-        
-        // Atualizar controles
-        updateCameraButton();
-        updateFlashButton();
-        checkFlashSupport();
-        
-        // Iniciar loop de previsão
-        appState.animationFrameId = window.requestAnimationFrame(webcamLoop);
-    } catch (error) {
-        console.error('Erro ao iniciar webcam:', error);
-        throw error;
-    } finally {
-        showLoading(false);
-    }
+      // Adicionar canvas ao container
+      domElements.webcamContainer.innerHTML = '';
+      domElements.webcamContainer.appendChild(appState.webcam.canvas);
+      
+      // Iniciar loop de previsão
+      appState.animationFrameId = window.requestAnimationFrame(webcamLoop);
+
+  } catch (error) {
+      console.error('Erro ao iniciar webcam:', error);
+      
+      let errorMessage = 'Erro ao acessar a câmera: ';
+      if (error.name === 'NotAllowedError') {
+          errorMessage = 'Permissão de câmera negada. Por favor, permita o acesso à câmera.';
+      } else if (error.name === 'NotFoundError') {
+          errorMessage = 'Nenhuma câmera encontrada.';
+      } else if (error.name === 'NotReadableError') {
+          errorMessage = 'Não foi possível acessar a câmera (pode estar em uso por outro aplicativo).';
+      } else {
+          errorMessage += error.message;
+      }
+      
+      domElements.webcamContainer.innerHTML = '<div class="camera-loading" style="color:red">'+errorMessage+'</div>';
+      displayErrorMessage(errorMessage);
+      
+      // Resetar estado
+      appState.isWebcamActive = false;
+      if (appState.stream) {
+          appState.stream.getTracks().forEach(track => track.stop());
+          appState.stream = null;
+      }
+  } finally {
+      showLoading(false);
+  }
 }
+
+// Verificação de elementos críticos
+document.addEventListener('DOMContentLoaded', () => {
+  const requiredElements = [
+      'webcam-container', 'image-preview', 'loading-overlay', 
+      'error-message', 'start-webcam-btn'
+  ];
+  
+  requiredElements.forEach(id => {
+      if (!document.getElementById(id)) {
+          console.error(`Elemento crítico não encontrado: #${id}`);
+          alert(`Erro de configuração: elemento #${id} não encontrado.`);
+      }
+  });
+});
 
 function checkFlashSupport() {
     if (!appState.track || !domElements.flashBtn) return;
