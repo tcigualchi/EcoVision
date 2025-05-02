@@ -294,7 +294,11 @@ async function startWebcam() {
     appState.webcam = new tmImage.Webcam(400, 400, flip);
     
     // Configurar o canvas antes de adicionar ao DOM
-    await appState.webcam.setup(constraints); // Usar as mesmas constraints
+    await appState.webcam.setup({
+      video: {
+        facingMode: appState.currentCamera
+      }
+    })
     
     if (!appState.webcam.canvas) {
       throw new Error('Canvas da webcam não foi criado corretamente');
