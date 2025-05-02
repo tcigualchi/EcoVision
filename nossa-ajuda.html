@@ -3,30 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoVision | Identificador de Materiais Recicláveis</title>
+    <title>EcoVision | Soluções Sustentáveis</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="imgs/icon.png" type="image/png">
 </head>
-<body>
+<section>
     <!-- Header -->
     <header id="header">
         <div class="container">
             <nav class="navbar">
-                <a href="index.html" class="logo">
-                    <img src="imgs/icon.png" alt="EcoVision Logo">
+                <a href="#" class="logo">
+                    <img src="/imgs/icon.png" alt="EcoVision Logo">
                     <span class="logo-text">EcoVision</span>
                 </a>
 
                 <ul class="nav-links">
-                    <li><a href="index.html">Início</a></li>
-                    <li><a href="index.html#features">Soluções</a></li>
-                    <li><a href="index.html#innovation">Inovação</a></li>
-                    <li><a href="nossa-ajuda.html" class="active">Nossa Ajuda</a></li>
-                    <li><a href="index.html#stats">Impacto</a></li>
-                    <li><a href="index.html#contact">Contato</a></li>
+                    <li><a href="#" class="active">Início</a></li>
+                    <li><a href="#features">Soluções</a></li>
+                    <li><a href="#innovation">Inovação</a></li>
+                    <li><a href="nossa-ajuda.html">Nossa Ajuda</a></li>
+                    <li><a href="#stats">Impacto</a></li>
+                    <li><a href="#contact">Contato</a></li>
                 </ul>
+
 
                 <div class="menu-toggle">
                     <i class="fas fa-bars"></i>
@@ -35,7 +35,6 @@
         </div>
     </header>
 
-    <!-- Seção Principal -->
     <section class="ai-section">
         <div class="container">
             <h2>Identificador de Materiais Recicláveis</h2>
@@ -51,42 +50,39 @@
                     </button>
                 </div>
                 
-                <!-- Seção de Upload -->
                 <div id="upload-section" class="hidden">
                     <input type="file" id="image-upload" accept="image/*" class="file-input">
                     <label for="image-upload" class="upload-label">
                         <i class="fas fa-cloud-upload-alt"></i>
                         <span>Selecione uma imagem</span>
                     </label>
-                    <div id="image-preview-container" class="hidden">
-                        <img id="image-preview" src="#" alt="Preview da imagem enviada">
-                        <button type="button" id="analyze-btn" class="start-btn">
-                            <i class="fas fa-search"></i> Analisar Imagem
-                        </button>
-                    </div>
                 </div>
                 
-                <!-- Seção da Webcam -->
                 <div id="webcam-section">
-                    <div id="webcam-container"></div>
-                    <div class="camera-controls">
-                        <button type="button" id="start-webcam-btn" class="start-btn">
-                            <i class="fas fa-play"></i> Iniciar Câmera
-                        </button>
-                        <button type="button" id="switch-camera-btn" class="btn" disabled>
-                            <i class="fas fa-camera-retro"></i> Alternar Câmera
-                        </button>
-                        <button type="button" id="flash-btn" class="btn" disabled>
-                            <i class="fas fa-lightbulb"></i> Flash
-                        </button>
-                    </div>
+					<button type="button" onclick="startWebcam()" class="start-btn">
+						<i class="fas fa-play"></i> Iniciar Câmera
+					</button>
+                   <div id="webcam-container"></div>
+                </div>
+                
+                <div id="image-preview-container" class="hidden">
+                    <img id="image-preview" src="#" alt="Preview da imagem enviada">
+                    <button type="button" id="analyze-btn" class="start-btn">
+                        <i class="fas fa-search"></i> Analisar Imagem
+                    </button>
                 </div>
             </div>
             
-            <!-- Resultados -->
-            <div id="label-container" class="results-container"></div>
+            <div id="label-container"></div>
         </div>
     </section>
+
+    <script src="js/tec.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    
+
+</section>
 
     <!-- Footer -->
     <footer id="contact">
@@ -106,11 +102,11 @@
                 <div class="footer-col">
                     <h3>Links Rápidos</h3>
                     <ul class="footer-links">
-                        <li><a href="index.html">Início</a></li>
-                        <li><a href="index.html#features">Soluções</a></li>
-                        <li><a href="index.html#innovation">Tecnologia</a></li>
-                        <li><a href="index.html#stats">Impacto</a></li>
-                        <li><a href="index.html#contact">Contato</a></li>
+                        <li><a href="#">Início</a></li>
+                        <li><a href="#features">Soluções</a></li>
+                        <li><a href="#innovation">Tecnologia</a></li>
+                        <li><a href="#stats">Impacto</a></li>
+                        <li><a href="#contact">Contato</a></li>
                     </ul>
                 </div>
 
@@ -137,20 +133,98 @@
         </div>
     </footer>
 
-    <!-- Overlay de Carregamento -->
-    <div id="loading-overlay">
-        <div class="loading-content">
-            <div class="spinner"></div>
-            <p id="loading-message">Processando...</p>
-        </div>
-    </div>
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
 
-    <!-- Mensagem de Erro -->
-    <div id="error-message" class="error-message"></div>
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
-    <script src="js/tec.js"></script>
+        // Sticky Header
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200;
+
+        function animateCounters() {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const increment = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(animateCounters, 1);
+                } else {
+                    counter.innerText = target;
+                }
+            });
+        }
+
+        // Intersection Observer for Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    
+                    // Start counters when stats section is visible
+                    if (entry.target.id === 'stats') {
+                        animateCounters();
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Form Submission
+        const forms = document.querySelectorAll('form');
+        forms.forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Obrigado por sua mensagem! Entraremos em contato em breve.');
+                form.reset();
+            });
+        });
+    </script>
 </body>
 </html>
