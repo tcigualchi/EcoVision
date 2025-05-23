@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoVision | Inovação em Reciclagem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .ai-innovation {
+            padding: 80px 0;
+        }
+        
+        .ai-container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .ai-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .ai-title {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .ai-subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .ai-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-card {
+            flex: 1 1 300px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 25px;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: #2ecc71;
+            margin-bottom: 15px;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .feature-description {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+        
+        .disclaimer {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .disclaimer-title {
+            color: #ff8f00;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .disclaimer-title i {
+            margin-right: 10px;
+        }
+        
+        .how-it-works {
+            margin-top: 50px;
+        }
+        
+        .tech-used {
+            background: #f5f5f5;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+        
+        .tech-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .tech-description {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .tech-logo {
+            max-width: 200px;
+            display: block;
+            margin: 20px auto;
+        }
+        
+        @media (max-width: 768px) {
+            .ai-features {
+                flex-direction: column;
+            }
+            
+            .feature-card {
+                flex: 1 1 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <img src="/imgs/icon.png" alt="EcoVision Logo">
+                    <span class="logo-text">EcoVision</span>
+                </a>
+
+                <ul class="nav-links">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="solucoes.html">Soluções</a></li>
+                    <li><a href="inovacao.html" class="active">Inovação</a></li>
+                    <li><a href="nossa-ajuda.html">Nossa Ajuda</a></li>
+                    <li><a href="impactos.html">Impacto</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="ai-innovation">
+        <div class="container">
+            <div class="ai-container">
+                <div class="ai-header">
+                    <h1 class="ai-title">Identificação Inteligente de Materiais Recicláveis</h1>
+                    <p class="ai-subtitle">Nossa tecnologia de inteligência artificial revoluciona a forma como identificamos e classificamos materiais para reciclagem</p>
+                </div>
+                
+                <div class="disclaimer">
+                    <h3 class="disclaimer-title"><i class="fas fa-exclamation-triangle"></i> Importante</h3>
+                    <p>Nosso sistema de identificação por IA, embora avançado, não possui 100% de precisão. Recomendamos sempre a verificação manual em caso de dúvidas sobre a classificação de materiais. A tecnologia serve como auxílio para facilitar o processo de reciclagem, mas não substitui completamente o julgamento humano.</p>
+                </div>
+                
+                <div class="ai-features">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <h3 class="feature-title">Identificação por Imagem</h3>
+                        <p class="feature-description">
+                            Basta tirar uma foto ou enviar uma imagem do material que nosso sistema analisa e identifica automaticamente o tipo de resíduo, sugerindo a melhor forma de reciclagem.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3 class="feature-title">Análise em Tempo Real</h3>
+                        <p class="feature-description">
+                            Ative sua câmera para uma análise contínua. O sistema identifica materiais recicláveis enquanto você os mostra à câmera, perfeito para organizar sua coleta seletiva.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="feature-title">Aprendizado Contínuo</h3>
+                        <p class="feature-description">
+                            Nossa IA melhora constantemente com cada interação. Quanto mais pessoas usam o sistema, mais preciso ele se torna na identificação de materiais.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="how-it-works">
+                    <h2>Como Funciona Nossa Tecnologia</h2>
+                    <p>Nosso sistema de identificação utiliza redes neurais convolucionais treinadas com milhares de imagens de materiais recicláveis. O processo envolve:</p>
+                    
+                    <ol style="line-height: 1.8; padding-left: 20px;">
+                        <li><strong>Captura da imagem</strong>: Através da câmera do dispositivo ou upload de arquivo</li>
+                        <li><strong>Pré-processamento</strong>: Ajuste de qualidade e preparação para análise</li>
+                        <li><strong>Classificação</strong>: Identificação do material baseado em padrões visuais</li>
+                        <li><strong>Análise contextual</strong>: Consideração de cores, formas e texturas características</li>
+                        <li><strong>Resultado</strong>: Exibição do tipo de material e instruções de reciclagem</li>
+                    </ol>
+                    
+                    <p>O sistema é capaz de distinguir entre mais de 50 categorias de materiais recicláveis comuns, incluindo variações de plásticos, metais, papéis e vidros.</p>
+                </div>
+                
+                <div class="tech-used">
+                    <h3 class="tech-title">Tecnologia por trás da solução</h3>
+                    <p class="tech-description">
+                        Desenvolvemos nosso identificador utilizando a plataforma <strong>Teachable Machine</strong> do Google, uma ferramenta poderosa que permite criar modelos de machine learning sem necessidade de profundos conhecimentos em programação. Esta escolha nos permitiu:
+                    </p>
+                    
+                    <ul style="line-height: 1.8; padding-left: 20px;">
+                        <li>Treinar rapidamente modelos precisos com nosso conjunto de dados</li>
+                        <li>Implementar soluções personalizadas para desafios específicos da reciclagem</li>
+                        <li>Atualizar e melhorar constantemente nossos modelos</li>
+                        <li>Garantir acessibilidade e desempenho em diversos dispositivos</li>
+                    </ul>
+                    
+                    <img src="https://teachablemachine.withgoogle.com/assets/img/favicon.png" alt="Teachable Machine Logo" class="tech-logo">
+                    
+                    <p class="tech-description">
+                        A Teachable Machine utiliza algoritmos de aprendizado profundo que analisam características visuais dos materiais para fazer previsões cada vez mais precisas à medida que o sistema é utilizado.
+                    </p>
+                </div>
+                
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="nossa-ajuda.html" class="btn btn-primary" style="padding: 12px 30px; font-size: 1.1rem;">
+                        <i class="fas fa-recycle"></i> Experimente Nosso Identificador
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Sobre Nós</h3>
+                    <p>A EcoVision lidera a revolução da reciclagem no Brasil com tecnologia de ponta e soluções sustentáveis.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="solucoes.html">Soluções</a></li>
+                        <li><a href="inovacao.html">Inovação</a></li>
+                        <li><a href="nossa-ajuda.html">Nossa Ajuda</a></li>
+                        <li><a href="impactos.html">Impacto</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Av. Sustentabilidade, 123 - São Paulo, SP</p>
+                    <p><i class="fas fa-phone"></i> (11) 98765-4321</p>
+                    <p><i class="fas fa-envelope"></i> contato@ecovision.com.br</p>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Assine para receber nossas atualizações e dicas sustentáveis.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Seu e-mail" required>
+                        <button type="submit" class="btn btn-primary">Assinar</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 EcoVision. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Sticky Header
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+
+        // Form Submission
+        const forms = document.querySelectorAll('form');
+        forms.forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Obrigado por sua mensagem! Entraremos em contato em breve.');
+                form.reset();
+            });
+        });
+    </script>
+</body>
+</html>

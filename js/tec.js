@@ -220,21 +220,15 @@ async function toggleWebcam() {
 async function startWebcam() {
   try {
     clearResults();
-
+    
     const flip = true;
     appState.webcam = new tmImage.Webcam(400, 400, flip);
     
-    // Tentar configurar a webcam
     await appState.webcam.setup();
-    
-    // Verificar se o stream foi configurado corretamente
-    if (!appState.webcam.webcam) {
-      throw new Error('A câmera não foi encontrada ou não foi possível iniciar a captura.');
-    }
-    
     await appState.webcam.play();
+    
     appState.isWebcamActive = true;
-
+    
     if (domElements.webcamContainer) {
       domElements.webcamContainer.innerHTML = '';
       domElements.webcamContainer.appendChild(appState.webcam.canvas);
@@ -243,14 +237,7 @@ async function startWebcam() {
     window.requestAnimationFrame(webcamLoop);
   } catch (error) {
     console.error('Erro ao iniciar webcam:', error);
-    if (error.name === 'NotAllowedError') {
-      alert('Acesso à câmera foi negado. Por favor, permita o acesso à câmera.');
-    } else if (error.name === 'NotFoundError') {
-      alert('Câmera não encontrada. Certifique-se de que um dispositivo de câmera está conectado.');
-    } else {
-      alert('Erro ao acessar a câmera: ' + error.message);
-    }
-    await stopWebcam();
+    throw error;
   }
 }
 
@@ -281,7 +268,7 @@ async function predictWebcam() {
 
 async function stopWebcam() {
   try {
-    if (appState.webcam && appState.webcam.webcam) {
+    if (appState.webcam) {
       await appState.webcam.stop();
       appState.webcam = null;
     }
@@ -385,21 +372,32 @@ function formatMaterialName(className) {
 // =============================================
 function clearResults() {
   if (domElements.labelContainer) {
-    domElements.labelContainer.innerHTML = '';
-  }
-}
-
-function showLoading(isLoading) {
-  const loadingElement = document.getElementById('loading');
-  if (loadingElement) {
-    loadingElement.style.display = isLoading ? 'block' : 'none';
+    domElements.labelContainer.innerHTML = '<div class="empty-message">Aguardando análise...</div>';
   }
 }
 
 function displayErrorMessage(message) {
-  const errorMessageContainer = document.getElementById('error-message');
-  if (errorMessageContainer) {
-    errorMessageContainer.textContent = message;
-    errorMessageContainer.style.display = 'block';
+  if (domElements.labelContainer) {
+    domElements.labelContainer.innerHTML = `<div class="error-message">${message}</div>`;
   }
+}
+
+function showLoading(show) {
+  const loadingIndicator = document.getElementById('loading-indicator') || createLoadingIndicator();
+  loadingIndicator.style.display = show ? 'block' : 'none';
+  
+  if (show && domElements.labelContainer) {
+    domElements.labelContainer.innerHTML = '<div class="loading-message">Analisando...</div>';
+  }
+}
+
+function createLoadingIndicator() {
+  const indicator = document.createElement('div');
+  indicator.id = 'loading-indicator';
+  indicator.className = 'loading-indicator';
+  indicator.innerHTML = '<div class="spinner"></div>';
+  indicator.style.display = 'none';
+  
+  document.body.appendChild(indicator);
+  return indicator;
 }

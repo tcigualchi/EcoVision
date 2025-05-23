@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoVision | Soluções de Reciclagem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .recycling-solutions {
+            padding: 80px 0;
+        }
+        
+        .solution-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            margin-bottom: 40px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .solution-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .solution-icon {
+            font-size: 2.5rem;
+            color: #2ecc71;
+            margin-bottom: 20px;
+        }
+        
+        .solution-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .solution-description {
+            color: #7f8c8d;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .benefits-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .benefits-list li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .benefits-list li:before {
+            content: "\f00c";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            color: #2ecc71;
+            position: absolute;
+            left: 0;
+        }
+        
+        .process-steps {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .process-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .step-number {
+            background: #2ecc71;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+        
+        .step-content {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <img src="/imgs/icon.png" alt="EcoVision Logo">
+                    <span class="logo-text">EcoVision</span>
+                </a>
+
+                <ul class="nav-links">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="solucoes.html" class="active">Soluções</a></li>
+                    <li><a href="inovacao.html">Inovação</a></li>
+                    <li><a href="nossa-ajuda.html">Nossa Ajuda</a></li>
+                    <li><a href="impactos.html">Impacto</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="recycling-solutions">
+        <div class="container">
+            <h1 class="section-title">Nossas Soluções de Reciclagem</h1>
+            <p class="section-subtitle">Transformando resíduos em recursos valiosos através de processos inovadores e sustentáveis</p>
+            
+            <div class="solution-card">
+                <div class="solution-icon">
+                    <i class="fas fa-laptop"></i>
+                </div>
+                <h2 class="solution-title">Reciclagem de Eletrônicos</h2>
+                <p class="solution-description">
+                    Na EcoVision, desenvolvemos um processo especializado para reciclagem de equipamentos eletrônicos que vai além da simples desmontagem. 
+                    Nossa tecnologia permite a recuperação de metais preciosos como ouro, prata e paládio presentes em placas de circuito, além de componentes 
+                    que podem ser reutilizados na indústria. O processo garante a destruição segura de dados sensíveis em dispositivos de armazenamento, 
+                    proporcionando segurança para empresas e indivíduos.
+                </p>
+                
+                <div class="process-steps">
+                    <h3 class="process-title">Nosso Processo:</h3>
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">Triagem e classificação por tipo de equipamento e material</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">Desmontagem manual para separação de componentes perigosos</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">Processamento mecânico para redução de tamanho</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">Separação magnética e por corrente de Foucault</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">Refino de metais preciosos</div>
+                    </div>
+                </div>
+                
+                <h3>Benefícios:</h3>
+                <ul class="benefits-list">
+                    <li>Redução da extração de minérios virgens</li>
+                    <li>Prevenção da contaminação por metais pesados</li>
+                    <li>Economia de energia na produção de novos equipamentos</li>
+                    <li>Geração de empregos especializados</li>
+                    <li>Certificado de destruição segura de dados</li>
+                </ul>
+            </div>
+            
+            <div class="solution-card">
+                <div class="solution-icon">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <h2 class="solution-title">Reciclagem de Metal</h2>
+                <p class="solution-description">
+                    Nossa abordagem para reciclagem metálica combina técnicas tradicionais com inovações tecnológicas. Trabalhamos com todos os tipos de metais, 
+                    desde alumínio e aço até metais mais complexos como titânio e ligas especiais. Utilizamos espectrometria por fluorescência de raios X para 
+                    classificação precisa, garantindo a pureza dos materiais recuperados. O processo reduz em até 95% o consumo de energia comparado à produção 
+                    a partir de minério bruto.
+                </p>
+                
+                <div class="process-steps">
+                    <h3 class="process-title">Nosso Processo:</h3>
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">Recebimento e pesagem dos materiais</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">Classificação por tipo de metal e grau</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">Fragmentação e compactação</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">Fusão em fornos especializados</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">Conformação em novos produtos</div>
+                    </div>
+                </div>
+                
+                <h3>Benefícios:</h3>
+                <ul class="benefits-list">
+                    <li>Conservação de recursos naturais não renováveis</li>
+                    <li>Redução significativa de emissões de CO2</li>
+                    <li>Economia circular para a indústria metalúrgica</li>
+                    <li>Valorização de resíduos industriais</li>
+                    <li>Certificado de origem sustentável para produtos</li>
+                </ul>
+            </div>
+            
+            <div class="solution-card">
+                <div class="solution-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h2 class="solution-title">Reciclagem Orgânica</h2>
+                <p class="solution-description">
+                    Transformamos resíduos orgânicos em recursos valiosos através de processos biológicos controlados. Nossa tecnologia de compostagem acelerada 
+                    reduz o tempo tradicional de meses para apenas semanas, produzindo adubo de alta qualidade. Para resíduos específicos, utilizamos digestão 
+                    anaeróbia para gerar biogás, uma fonte renovável de energia. Todo o processo é monitorado com sensores IoT para garantir eficiência e 
+                    qualidade do produto final.
+                </p>
+                
+                <div class="process-steps">
+                    <h3 class="process-title">Nosso Processo:</h3>
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">Separação e trituração dos materiais</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">Balanceamento da relação carbono/nitrogênio</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">Processo de compostagem ou digestão</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">Cura e maturação do composto</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">Análise laboratorial e embalagem</div>
+                    </div>
+                </div>
+                
+                <h3>Benefícios:</h3>
+                <ul class="benefits-list">
+                    <li>Redução do volume de resíduos em aterros</li>
+                    <li>Produção de fertilizantes naturais</li>
+                    <li>Geração de energia renovável</li>
+                    <li>Melhoria da estrutura do solo</li>
+                    <li>Redução de emissões de metano</li>
+                </ul>
+            </div>
+            
+            <div class="solution-card">
+                <div class="solution-icon">
+                    <i class="fas fa-recycle"></i>
+                </div>
+                <h2 class="solution-title">Reciclagem de Plástico</h2>
+                <p class="solution-description">
+                    Desenvolvemos soluções avançadas para todos os tipos de plásticos, incluindo os de difícil reciclagem. Nossa tecnologia de identificação 
+                    por infravermelho próximo (NIR) permite a separação precisa por tipo de polímero, mesmo em embalagens multicamadas. Para plásticos 
+                    contaminados, utilizamos processos de lavagem especializados que garantem a qualidade do material reciclado. Também trabalhamos com 
+                    tecnologias de upcycling, transformando resíduos plásticos em produtos de maior valor agregado.
+                </p>
+                
+                <div class="process-steps">
+                    <h3 class="process-title">Nosso Processo:</h3>
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">Triagem automatizada por tipo de plástico</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">Moagem e lavagem intensiva</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">Separação por densidade</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">Extrusão e pelletização</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">Controle de qualidade e testes</div>
+                    </div>
+                </div>
+                
+                <h3>Benefícios:</h3>
+                <ul class="benefits-list">
+                    <li>Redução da poluição por plásticos</li>
+                    <li>Economia de petróleo virgem</li>
+                    <li>Possibilidade de reciclagem múltipla</li>
+                    <li>Soluções para plásticos de difícil reciclagem</li>
+                    <li>Produção de matérias-primas secundárias</li>
+                </ul>
+            </div>
+            
+            <div class="solution-card">
+                <div class="solution-icon">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <h2 class="solution-title">Reciclagem Química</h2>
+                <p class="solution-description">
+                    Para materiais que não podem ser reciclados mecanicamente, oferecemos soluções de reciclagem química inovadoras. Nossos processos de 
+                    pirólise, hidrogenação e despolimerização permitem quebrar polímeros complexos em seus componentes básicos, que podem ser utilizados 
+                    como matéria-prima para novos plásticos ou outros produtos químicos. Esta abordagem fecha completamente o ciclo de vida dos materiais, 
+                    evitando o downcycling comum em outros processos.
+                </p>
+                
+                <div class="process-steps">
+                    <h3 class="process-title">Nosso Processo:</h3>
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">Pré-tratamento e preparação dos resíduos</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">Processo térmico ou químico controlado</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">Separação e purificação dos componentes</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">Análise e controle de qualidade</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">Reintegração na cadeia produtiva</div>
+                    </div>
+                </div>
+                
+                <h3>Benefícios:</h3>
+                <ul class="benefits-list">
+                    <li>Solução para plásticos mistos e contaminados</li>
+                    <li>Produção de matérias-primas virgens equivalentes</li>
+                    <li>Redução da dependência de recursos fósseis</li>
+                    <li>Tecnologia complementar à reciclagem mecânica</li>
+                    <li>Possibilidade de reciclagem infinita</li>
+                </ul>
+            </div>
+            
+            <div class="solution-card">
+                <div class="solution-icon">
+                    <i class="fas fa-wine-bottle"></i>
+                </div>
+                <h2 class="solution-title">Reciclagem de Vidro</h2>
+                <p class="solution-description">
+                    Nossa abordagem para reciclagem de vidro utiliza tecnologias de separação por cor automatizadas, garantindo a pureza necessária para a 
+                    produção de novos produtos. Desenvolvemos processos especiais para tratamento de vidros planos, embalagens e até vidros especiais como 
+                    os utilizados em laboratórios. O vidro reciclado em nossas instalações reduz significativamente o consumo energético nas vidrarias e 
+                    aumenta a vida útil dos fornos.
+                </p>
+                
+                <div class="process-steps">
+                    <h3 class="process-title">Nosso Processo:</h3>
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">Recebimento e triagem inicial</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">Remoção de contaminantes (metais, cerâmicas)</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">Separação por cor automatizada</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">Moagem e lavagem</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">Preparação para fusão</div>
+                    </div>
+                </div>
+                
+                <h3>Benefícios:</h3>
+                <ul class="benefits-list">
+                    <li>Redução de até 30% no consumo energético</li>
+                    <li>Diminuição da extração de areia e outros minerais</li>
+                    <li>Possibilidade de reciclagem infinita sem perda de qualidade</li>
+                    <li>Redução de resíduos em aterros</li>
+                    <li>Produção de novos produtos com menor pegada ambiental</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Sobre Nós</h3>
+                    <p>A EcoVision lidera a revolução da reciclagem no Brasil com tecnologia de ponta e soluções sustentáveis.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="solucoes.html">Soluções</a></li>
+                        <li><a href="inovacao.html">Tecnologia</a></li>
+                        <li><a href="nossa-ajuda.html">Nossa Ajuda</a></li>
+                        <li><a href="impactos.html">Impacto</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Av. Sustentabilidade, 123 - São Paulo, SP</p>
+                    <p><i class="fas fa-phone"></i> (11) 98765-4321</p>
+                    <p><i class="fas fa-envelope"></i> contato@ecovision.com.br</p>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Assine para receber nossas atualizações e dicas sustentáveis.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Seu e-mail" required>
+                        <button type="submit" class="btn btn-primary">Assinar</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 EcoVision. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Sticky Header
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+
+        // Form Submission
+        const forms = document.querySelectorAll('form');
+        forms.forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Obrigado por sua mensagem! Entraremos em contato em breve.');
+                form.reset();
+            });
+        });
+    </script>
+</body>
+</html>
