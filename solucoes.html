@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoVision | Soluções de Reciclagem</title>
+    <title>EcoVision | Guia de Reciclagem</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/x-icon" href="icon.png">
     <style>
-        .recycling-solutions {
+        .recycling-guide {
             padding: 80px 0;
         }
         
-        .solution-card {
+        .guide-card {
             background: #fff;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
@@ -22,43 +22,43 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        .solution-card:hover {
+        .guide-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
         
-        .solution-icon {
+        .guide-icon {
             font-size: 2.5rem;
             color: #2ecc71;
             margin-bottom: 20px;
         }
         
-        .solution-title {
+        .guide-title {
             font-size: 1.8rem;
             color: #2c3e50;
             margin-bottom: 15px;
             font-weight: 600;
         }
         
-        .solution-description {
+        .guide-description {
             color: #7f8c8d;
             line-height: 1.8;
             margin-bottom: 20px;
         }
         
-        .benefits-list {
+        .tips-list {
             list-style-type: none;
             padding-left: 0;
         }
         
-        .benefits-list li {
+        .tips-list li {
             padding: 8px 0;
             position: relative;
             padding-left: 30px;
         }
         
-        .benefits-list li:before {
-            content: "\f00c";
+        .tips-list li:before {
+            content: "\f058";
             font-family: "Font Awesome 5 Free";
             font-weight: 900;
             color: #2ecc71;
@@ -101,6 +101,42 @@
         .step-content {
             flex-grow: 1;
         }
+        
+        .materials-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .materials-table th, .materials-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .materials-table th {
+            background-color: #f2f2f2;
+            color: #2c3e50;
+        }
+        
+        .materials-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .materials-table tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .recycling-locations {
+            margin-top: 30px;
+        }
+        
+        .location-card {
+            background: #f5f5f5;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
@@ -129,285 +165,364 @@
     </header>
 
     <!-- Main Content -->
-    <section class="recycling-solutions">
+    <section class="recycling-guide">
         <div class="container">
-            <h1 class="section-title">Nossas Soluções de Reciclagem</h1>
-            <p class="section-subtitle">Transformando resíduos em recursos valiosos através de processos inovadores e sustentáveis</p>
+            <h1 class="section-title">Guia Completo de Reciclagem</h1>
+            <p class="section-subtitle">Aprenda como reciclar diferentes tipos de materiais de forma correta e eficiente</p>
             
-            <div class="solution-card">
-                <div class="solution-icon">
+            <div class="guide-card">
+                <div class="guide-icon">
                     <i class="fas fa-laptop"></i>
                 </div>
-                <h2 class="solution-title">Reciclagem de Eletrônicos</h2>
-                <p class="solution-description">
-                    Na EcoVision, desenvolvemos um processo especializado para reciclagem de equipamentos eletrônicos que vai além da simples desmontagem. 
-                    Nossa tecnologia permite a recuperação de metais preciosos como ouro, prata e paládio presentes em placas de circuito, além de componentes 
-                    que podem ser reutilizados na indústria. O processo garante a destruição segura de dados sensíveis em dispositivos de armazenamento, 
-                    proporcionando segurança para empresas e indivíduos.
+                <h2 class="guide-title">Como Reciclar Eletrônicos</h2>
+                <p class="guide-description">
+                    A reciclagem de eletrônicos é essencial para evitar a contaminação por metais pesados e recuperar materiais valiosos. Veja como fazer corretamente:
                 </p>
                 
                 <div class="process-steps">
-                    <h3 class="process-title">Nosso Processo:</h3>
+                    <h3 class="process-title">Passo a Passo:</h3>
                     <div class="step">
                         <div class="step-number">1</div>
-                        <div class="step-content">Triagem e classificação por tipo de equipamento e material</div>
+                        <div class="step-content">
+                            <strong>Apague todos os dados pessoais</strong> - Formate dispositivos de armazenamento ou use softwares especializados
+                        </div>
                     </div>
                     <div class="step">
                         <div class="step-number">2</div>
-                        <div class="step-content">Desmontagem manual para separação de componentes perigosos</div>
+                        <div class="step-content">
+                            <strong>Separe por categoria</strong> - Celulares, computadores, eletrodomésticos, etc.
+                        </div>
                     </div>
                     <div class="step">
                         <div class="step-number">3</div>
-                        <div class="step-content">Processamento mecânico para redução de tamanho</div>
+                        <div class="step-content">
+                            <strong>Remova baterias</strong> - Devem ser descartadas separadamente em pontos específicos
+                        </div>
                     </div>
                     <div class="step">
                         <div class="step-number">4</div>
-                        <div class="step-content">Separação magnética e por corrente de Foucault</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">5</div>
-                        <div class="step-content">Refino de metais preciosos</div>
+                        <div class="step-content">
+                            <strong>Leve a pontos de coleta</strong> - Procure centros de reciclagem autorizados em sua cidade
+                        </div>
                     </div>
                 </div>
                 
-                <h3>Benefícios:</h3>
-                <ul class="benefits-list">
-                    <li>Redução da extração de minérios virgens</li>
-                    <li>Prevenção da contaminação por metais pesados</li>
-                    <li>Economia de energia na produção de novos equipamentos</li>
-                    <li>Geração de empregos especializados</li>
-                    <li>Certificado de destruição segura de dados</li>
-                </ul>
+                <h3>O que pode ser reciclado:</h3>
+                <table class="materials-table">
+                    <tr>
+                        <th>Material</th>
+                        <th>Como Preparar</th>
+                        <th>Onde Reciclar</th>
+                    </tr>
+                    <tr>
+                        <td>Celulares</td>
+                        <td>Remova bateria e cartões SIM</td>
+                        <td>Lojas de operadoras ou pontos específicos</td>
+                    </tr>
+                    <tr>
+                        <td>Computadores</td>
+                        <td>Separe monitor, CPU e periféricos</td>
+                        <td>Cooperativas de reciclagem eletrônica</td>
+                    </tr>
+                    <tr>
+                        <td>Pilhas e baterias</td>
+                        <td>Não misture com outros resíduos</td>
+                        <td>Pontos de coleta em supermercados</td>
+                    </tr>
+                </table>
+                
+                <div class="recycling-locations">
+                    <h3>Encontre locais de coleta:</h3>
+                    <div class="location-card">
+                        <h4>Centro de Reciclagem Eletrônica - Zona Sul</h4>
+                        <p>Av. Sustentabilidade, 500 - Aberto de segunda a sábado, 9h-18h</p>
+                    </div>
+                    <div class="location-card">
+                        <h4>Ecoponto Eletrônico - Centro</h4>
+                        <p>Praça da Reciclagem, 100 - Funciona 24h</p>
+                    </div>
+                </div>
             </div>
             
-            <div class="solution-card">
-                <div class="solution-icon">
+            <div class="guide-card">
+                <div class="guide-icon">
                     <i class="fas fa-cog"></i>
                 </div>
-                <h2 class="solution-title">Reciclagem de Metal</h2>
-                <p class="solution-description">
-                    Nossa abordagem para reciclagem metálica combina técnicas tradicionais com inovações tecnológicas. Trabalhamos com todos os tipos de metais, 
-                    desde alumínio e aço até metais mais complexos como titânio e ligas especiais. Utilizamos espectrometria por fluorescência de raios X para 
-                    classificação precisa, garantindo a pureza dos materiais recuperados. O processo reduz em até 95% o consumo de energia comparado à produção 
-                    a partir de minério bruto.
+                <h2 class="guide-title">Reciclagem de Metais</h2>
+                <p class="guide-description">
+                    Metais são 100% recicláveis e podem ser reprocessados infinitamente sem perder qualidade. Saiba como descartá-los corretamente:
                 </p>
                 
                 <div class="process-steps">
-                    <h3 class="process-title">Nosso Processo:</h3>
+                    <h3 class="process-title">Como Separar:</h3>
                     <div class="step">
                         <div class="step-number">1</div>
-                        <div class="step-content">Recebimento e pesagem dos materiais</div>
+                        <div class="step-content">
+                            <strong>Limpe os materiais</strong> - Remova resíduos de alimentos ou outros contaminantes
+                        </div>
                     </div>
                     <div class="step">
                         <div class="step-number">2</div>
-                        <div class="step-content">Classificação por tipo de metal e grau</div>
+                        <div class="step-content">
+                            <strong>Separe por tipo</strong> - Alumínio, aço, cobre, etc. (use imãs para identificar o aço)
+                        </div>
                     </div>
                     <div class="step">
                         <div class="step-number">3</div>
-                        <div class="step-content">Fragmentação e compactação</div>
+                        <div class="step-content">
+                            <strong>Compacte quando possível</strong> - Amasse latas para economizar espaço
+                        </div>
                     </div>
                     <div class="step">
                         <div class="step-number">4</div>
-                        <div class="step-content">Fusão em fornos especializados</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">5</div>
-                        <div class="step-content">Conformação em novos produtos</div>
+                        <div class="step-content">
+                            <strong>Entregue em centros de reciclagem</strong> - Ou para catadores credenciados
+                        </div>
                     </div>
                 </div>
                 
-                <h3>Benefícios:</h3>
-                <ul class="benefits-list">
-                    <li>Conservação de recursos naturais não renováveis</li>
-                    <li>Redução significativa de emissões de CO2</li>
-                    <li>Economia circular para a indústria metalúrgica</li>
-                    <li>Valorização de resíduos industriais</li>
-                    <li>Certificado de origem sustentável para produtos</li>
+                <h3>Dicas para Reciclar Metais:</h3>
+                <ul class="tips-list">
+                    <li>Latas de alumínio (refrigerante, cerveja) são as mais valiosas para reciclagem</li>
+                    <li>Objetos metálicos pequenos (pregos, parafusos) podem ser acumulados em potes antes de descartar</li>
+                    <li>Panelas velhas devem ter cabos de plástico ou madeira removidos antes</li>
+                    <li>Arames e fios metálicos devem ser enrolados para facilitar o transporte</li>
                 </ul>
             </div>
             
-            <div class="solution-card">
-                <div class="solution-icon">
+            <div class="guide-card">
+                <div class="guide-icon">
                     <i class="fas fa-leaf"></i>
                 </div>
-                <h2 class="solution-title">Reciclagem Orgânica</h2>
-                <p class="solution-description">
-                    Transformamos resíduos orgânicos em recursos valiosos através de processos biológicos controlados. Nossa tecnologia de compostagem acelerada 
-                    reduz o tempo tradicional de meses para apenas semanas, produzindo adubo de alta qualidade. Para resíduos específicos, utilizamos digestão 
-                    anaeróbia para gerar biogás, uma fonte renovável de energia. Todo o processo é monitorado com sensores IoT para garantir eficiência e 
-                    qualidade do produto final.
+                <h2 class="guide-title">Compostagem Caseira</h2>
+                <p class="guide-description">
+                    Transforme seus resíduos orgânicos em adubo rico para plantas com essas técnicas simples de compostagem doméstica:
                 </p>
                 
                 <div class="process-steps">
-                    <h3 class="process-title">Nosso Processo:</h3>
+                    <h3 class="process-title">Método Básico:</h3>
                     <div class="step">
                         <div class="step-number">1</div>
-                        <div class="step-content">Separação e trituração dos materiais</div>
+                        <div class="step-content">
+                            <strong>Escolha um local</strong> - Balde, caixa ou área no jardim (1m x 1m)
+                        </div>
                     </div>
                     <div class="step">
                         <div class="step-number">2</div>
-                        <div class="step-content">Balanceamento da relação carbono/nitrogênio</div>
+                        <div class="step-content">
+                            <strong>Misture materiais</strong> - 3 partes de materiais secos (folhas, serragem) para 1 parte de úmidos (restos de comida)
+                        </div>
                     </div>
                     <div class="step">
                         <div class="step-number">3</div>
-                        <div class="step-content">Processo de compostagem ou digestão</div>
+                        <div class="step-content">
+                            <strong>Revire semanalmente</strong> - Para aerar e acelerar a decomposição
+                        </div>
                     </div>
                     <div class="step">
                         <div class="step-number">4</div>
-                        <div class="step-content">Cura e maturação do composto</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">5</div>
-                        <div class="step-content">Análise laboratorial e embalagem</div>
+                        <div class="step-content">
+                            <strong>Espere 2-3 meses</strong> - Até obter um composto escuro e homogêneo
+                        </div>
                     </div>
                 </div>
                 
-                <h3>Benefícios:</h3>
-                <ul class="benefits-list">
-                    <li>Redução do volume de resíduos em aterros</li>
-                    <li>Produção de fertilizantes naturais</li>
-                    <li>Geração de energia renovável</li>
-                    <li>Melhoria da estrutura do solo</li>
-                    <li>Redução de emissões de metano</li>
-                </ul>
+                <h3>O que pode e não pode compostar:</h3>
+                <table class="materials-table">
+                    <tr>
+                        <th>Pode compostar</th>
+                        <th>Evitar</th>
+                    </tr>
+                    <tr>
+                        <td>Cascas de frutas e legumes</td>
+                        <td>Carnes e laticínios</td>
+                    </tr>
+                    <tr>
+                        <td>Borras de café e saquinhos de chá</td>
+                        <td>Gorduras e óleos</td>
+                    </tr>
+                    <tr>
+                        <td>Cascas de ovos trituradas</td>
+                        <td>Fezes de animais</td>
+                    </tr>
+                    <tr>
+                        <td>Folhas secas e grama cortada</td>
+                        <td>Plantas doentes</td>
+                    </tr>
+                </table>
             </div>
             
-            <div class="solution-card">
-                <div class="solution-icon">
+            <div class="guide-card">
+                <div class="guide-icon">
                     <i class="fas fa-recycle"></i>
                 </div>
-                <h2 class="solution-title">Reciclagem de Plástico</h2>
-                <p class="solution-description">
-                    Desenvolvemos soluções avançadas para todos os tipos de plásticos, incluindo os de difícil reciclagem. Nossa tecnologia de identificação 
-                    por infravermelho próximo (NIR) permite a separação precisa por tipo de polímero, mesmo em embalagens multicamadas. Para plásticos 
-                    contaminados, utilizamos processos de lavagem especializados que garantem a qualidade do material reciclado. Também trabalhamos com 
-                    tecnologias de upcycling, transformando resíduos plásticos em produtos de maior valor agregado.
+                <h2 class="guide-title">Reciclagem de Plásticos</h2>
+                <p class="guide-description">
+                    Com tantos tipos de plástico, é essencial saber identificá-los para uma reciclagem eficiente:
                 </p>
                 
                 <div class="process-steps">
-                    <h3 class="process-title">Nosso Processo:</h3>
+                    <h3 class="process-title">Identificação:</h3>
                     <div class="step">
                         <div class="step-number">1</div>
-                        <div class="step-content">Triagem automatizada por tipo de plástico</div>
+                        <div class="step-content">
+                            <strong>Procure o símbolo de reciclagem</strong> - Número dentro do triângulo indica o tipo (1 a 7)
+                        </div>
                     </div>
                     <div class="step">
                         <div class="step-number">2</div>
-                        <div class="step-content">Moagem e lavagem intensiva</div>
+                        <div class="step-content">
+                            <strong>Limpe os recipientes</strong> - Remova resíduos e lave rapidamente
+                        </div>
                     </div>
                     <div class="step">
                         <div class="step-number">3</div>
-                        <div class="step-content">Separação por densidade</div>
+                        <div class="step-content">
+                            <strong>Retire rótulos e tampas</strong> - Materiais diferentes devem ser separados
+                        </div>
                     </div>
                     <div class="step">
                         <div class="step-number">4</div>
-                        <div class="step-content">Extrusão e pelletização</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">5</div>
-                        <div class="step-content">Controle de qualidade e testes</div>
+                        <div class="step-content">
+                            <strong>Compacte garrafas</strong> - Para ocupar menos espaço na coleta
+                        </div>
                     </div>
                 </div>
                 
-                <h3>Benefícios:</h3>
-                <ul class="benefits-list">
-                    <li>Redução da poluição por plásticos</li>
-                    <li>Economia de petróleo virgem</li>
-                    <li>Possibilidade de reciclagem múltipla</li>
-                    <li>Soluções para plásticos de difícil reciclagem</li>
-                    <li>Produção de matérias-primas secundárias</li>
+                <h3>Tipos de Plástico mais Comuns:</h3>
+                <ul class="tips-list">
+                    <li><strong>PET (1)</strong> - Garrafas de refrigerante, embalagens de alimentos</li>
+                    <li><strong>PEAD (2)</strong> - Frascos de shampoo, embalagens de produtos de limpeza</li>
+                    <li><strong>PVC (3)</strong> - Tubulações, embalagens de óleo</li>
+                    <li><strong>PELD (4)</strong> - Sacolas plásticas, filmes plásticos</li>
+                    <li><strong>PP (5)</strong> - Embalagens de margarina, potes de iogurte</li>
+                    <li><strong>PS (6)</strong> - Copos descartáveis, bandejas de isopor</li>
                 </ul>
             </div>
             
-            <div class="solution-card">
-                <div class="solution-icon">
+            <div class="guide-card">
+                <div class="guide-icon">
                     <i class="fas fa-flask"></i>
                 </div>
-                <h2 class="solution-title">Reciclagem Química</h2>
-                <p class="solution-description">
-                    Para materiais que não podem ser reciclados mecanicamente, oferecemos soluções de reciclagem química inovadoras. Nossos processos de 
-                    pirólise, hidrogenação e despolimerização permitem quebrar polímeros complexos em seus componentes básicos, que podem ser utilizados 
-                    como matéria-prima para novos plásticos ou outros produtos químicos. Esta abordagem fecha completamente o ciclo de vida dos materiais, 
-                    evitando o downcycling comum em outros processos.
+                <h2 class="guide-title">Resíduos Químicos Domésticos</h2>
+                <p class="guide-description">
+                    Produtos químicos exigem cuidados especiais no descarte para evitar contaminação:
                 </p>
                 
                 <div class="process-steps">
-                    <h3 class="process-title">Nosso Processo:</h3>
+                    <h3 class="process-title">Descarte Seguro:</h3>
                     <div class="step">
                         <div class="step-number">1</div>
-                        <div class="step-content">Pré-tratamento e preparação dos resíduos</div>
+                        <div class="step-content">
+                            <strong>Nunca despeje no ralo</strong> - Pode contaminar a água
+                        </div>
                     </div>
                     <div class="step">
                         <div class="step-number">2</div>
-                        <div class="step-content">Processo térmico ou químico controlado</div>
+                        <div class="step-content">
+                            <strong>Mantenha na embalagem original</strong> - Identifique claramente
+                        </div>
                     </div>
                     <div class="step">
                         <div class="step-number">3</div>
-                        <div class="step-content">Separação e purificação dos componentes</div>
+                        <div class="step-content">
+                            <strong>Separe por compatibilidade</strong> - Ácidos, bases, solventes, etc.
+                        </div>
                     </div>
                     <div class="step">
                         <div class="step-number">4</div>
-                        <div class="step-content">Análise e controle de qualidade</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">5</div>
-                        <div class="step-content">Reintegração na cadeia produtiva</div>
+                        <div class="step-content">
+                            <strong>Leve a postos de coleta</strong> - Verifique datas de coleta especial em sua cidade
+                        </div>
                     </div>
                 </div>
                 
-                <h3>Benefícios:</h3>
-                <ul class="benefits-list">
-                    <li>Solução para plásticos mistos e contaminados</li>
-                    <li>Produção de matérias-primas virgens equivalentes</li>
-                    <li>Redução da dependência de recursos fósseis</li>
-                    <li>Tecnologia complementar à reciclagem mecânica</li>
-                    <li>Possibilidade de reciclagem infinita</li>
-                </ul>
+                <h3>Resíduos Químicos Comuns e Alternativas:</h3>
+                <table class="materials-table">
+                    <tr>
+                        <th>Produto</th>
+                        <th>Descarte Correto</th>
+                        <th>Alternativa Ecológica</th>
+                    </tr>
+                    <tr>
+                        <td>Tintas</td>
+                        <td>Postos de coleta de resíduos perigosos</td>
+                        <td>Tintas à base de água</td>
+                    </tr>
+                    <tr>
+                        <td>Óleo de cozinha</td>
+                        <td>Armazenar em garrafa PET e levar a pontos de coleta</td>
+                        <td>Reutilizar filtrado ou fazer sabão</td>
+                    </tr>
+                    <tr>
+                        <td>Pilhas e baterias</td>
+                        <td>Lojas de eletrônicos ou supermercados</td>
+                        <td>Pilhas recarregáveis</td>
+                    </tr>
+                    <tr>
+                        <td>Medicamentos</td>
+                        <td>Farmácias com pontos de coleta</td>
+                        <td>Compre apenas o necessário</td>
+                    </tr>
+                </table>
             </div>
             
-            <div class="solution-card">
-                <div class="solution-icon">
+            <div class="guide-card">
+                <div class="guide-icon">
                     <i class="fas fa-wine-bottle"></i>
                 </div>
-                <h2 class="solution-title">Reciclagem de Vidro</h2>
-                <p class="solution-description">
-                    Nossa abordagem para reciclagem de vidro utiliza tecnologias de separação por cor automatizadas, garantindo a pureza necessária para a 
-                    produção de novos produtos. Desenvolvemos processos especiais para tratamento de vidros planos, embalagens e até vidros especiais como 
-                    os utilizados em laboratórios. O vidro reciclado em nossas instalações reduz significativamente o consumo energético nas vidrarias e 
-                    aumenta a vida útil dos fornos.
+                <h2 class="guide-title">Reciclagem de Vidro</h2>
+                <p class="guide-description">
+                    O vidro é 100% reciclável e pode ser transformado infinitamente sem perder qualidade:
                 </p>
                 
                 <div class="process-steps">
-                    <h3 class="process-title">Nosso Processo:</h3>
+                    <h3 class="process-title">Como Reciclar:</h3>
                     <div class="step">
                         <div class="step-number">1</div>
-                        <div class="step-content">Recebimento e triagem inicial</div>
+                        <div class="step-content">
+                            <strong>Lave os recipientes</strong> - Remova resíduos de alimentos ou líquidos
+                        </div>
                     </div>
                     <div class="step">
                         <div class="step-number">2</div>
-                        <div class="step-content">Remoção de contaminantes (metais, cerâmicas)</div>
+                        <div class="step-content">
+                            <strong>Retire tampas e rótulos</strong> - Materiais diferentes devem ser separados
+                        </div>
                     </div>
                     <div class="step">
                         <div class="step-number">3</div>
-                        <div class="step-content">Separação por cor automatizada</div>
+                        <div class="step-content">
+                            <strong>Separe por cor</strong> - Âmbar, verde e transparente (facilita a reciclagem)
+                        </div>
                     </div>
                     <div class="step">
                         <div class="step-number">4</div>
-                        <div class="step-content">Moagem e lavagem</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">5</div>
-                        <div class="step-content">Preparação para fusão</div>
+                        <div class="step-content">
+                            <strong>Descarte em contentores específicos</strong> - Ou leve a centros de reciclagem
+                        </div>
                     </div>
                 </div>
                 
-                <h3>Benefícios:</h3>
-                <ul class="benefits-list">
-                    <li>Redução de até 30% no consumo energético</li>
-                    <li>Diminuição da extração de areia e outros minerais</li>
-                    <li>Possibilidade de reciclagem infinita sem perda de qualidade</li>
-                    <li>Redução de resíduos em aterros</li>
-                    <li>Produção de novos produtos com menor pegada ambiental</li>
+                <h3>Dicas Importantes:</h3>
+                <ul class="tips-list">
+                    <li>Cacos de vidro devem ser embrulhados em papel grosso e identificados como "VIDRO QUEBRADO"</li>
+                    <li>Espelhos, vidros temperados e cerâmicas não são recicláveis no mesmo processo</li>
+                    <li>Garrafas inteiras são preferíveis a vidro quebrado para reciclagem</li>
+                    <li>Considere reutilizar frascos de vidro antes de reciclar</li>
                 </ul>
+                
+                <div class="recycling-locations">
+                    <h3>Onde descartar vidro em sua cidade:</h3>
+                    <div class="location-card">
+                        <h4>Ecoponto Vidro - Zona Norte</h4>
+                        <p>Rua da Reciclagem, 250 - Aberto todos os dias, 8h-20h</p>
+                    </div>
+                    <div class="location-card">
+                        <h4>Cooperativa Vidro Verde</h4>
+                        <p>Av. Ecológica, 750 - Recebe grandes quantidades com agendamento</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -507,7 +622,7 @@
         forms.forEach(form => {
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                alert('Obrigado por sua mensagem! Entraremos em contato em breve.');
+                alert('Obrigado por se inscrever em nossa newsletter!');
                 form.reset();
             });
         });
