@@ -3,11 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoVision | Soluções Sustentáveis</title>
+    <title>EcoVision | Impacto Ambiental</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/x-icon" href="icon.png">
+    <style>
+        .impact-section {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .impact-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .impact-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .impact-subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .impact-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .impact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .impact-card-header {
+            padding: 25px;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            position: relative;
+        }
+        
+        .impact-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .impact-card-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .impact-card-body {
+            padding: 25px;
+        }
+        
+        .impact-stat {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .stat-icon {
+            font-size: 1.5rem;
+            color: #2ecc71;
+            margin-right: 15px;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .stat-content {
+            flex: 1;
+        }
+        
+        .stat-value {
+            font-weight: 700;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .impact-chart-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .chart-title {
+            text-align: center;
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        
+        .chart-description {
+            text-align: center;
+            color: #7f8c8d;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+        
+        .impact-cta {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-radius: 12px;
+            color: white;
+        }
+        
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-text {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .impact-card {
+                max-width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -15,7 +167,7 @@
         <div class="container">
             <nav class="navbar">
                 <a href="#" class="logo">
-                    <img src="icon.png" alt="EcoVision Logo">
+                    <img src="/imgs/icon.png" alt="EcoVision Logo">
                     <span class="logo-text">EcoVision</span>
                 </a>
 
@@ -24,10 +176,9 @@
                     <li><a href="solucoes.html">Soluções</a></li>
                     <li><a href="inovacao.html">Inovação</a></li>
                     <li><a href="nossa-ajuda.html">Nossa Ajuda</a></li>
-                    <li><a href="impactos.html"  class="active">Impacto</a></li>
-                    <li><a href="contato.html">Contato</a></li>
+                    <li><a href="impactos.html" class="active">Impacto</a></li>
+                    <li><a href="#contact">Contato</a></li>
                 </ul>
-
 
                 <div class="menu-toggle">
                     <i class="fas fa-bars"></i>
@@ -36,108 +187,340 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
+    <!-- Main Content -->
+    <section class="impact-section">
         <div class="container">
-            <div class="hero-content animate">
-                <h1 class="animate delay-1">Revolucionando a Reciclagem no Brasil</h1>
-                <p class="animate delay-2">Tecnologia e sustentabilidade trabalhando juntas para criar um futuro mais limpo e verde para as próximas gerações.</p>
-                <div class="hero-btns animate delay-3">
-                    <a href="#" class="btn btn-primary">Nossas Soluções</a>
-                    <a href="#" class="btn btn-outline">Saiba Mais</a>
+            <div class="impact-header">
+                <h1 class="impact-title">Impacto Ambiental dos Resíduos</h1>
+                <p class="impact-subtitle">Conheça os efeitos de cada tipo de resíduo no planeta e como a reciclagem pode transformar esse cenário</p>
+            </div>
+            
+            <div class="impact-grid">
+                <!-- Papel -->
+                <div class="impact-card">
+                    <div class="impact-card-header">
+                        <div class="impact-card-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h2 class="impact-card-title">Papel</h2>
+                    </div>
+                    <div class="impact-card-body">
+                        <div class="impact-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-tree"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">1 tonelada de papel reciclado</div>
+                                <div class="stat-label">Salva cerca de 22 árvores e reduz o consumo de água em 50%</div>
+                            </div>
+                        </div>
+                        <div class="impact-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">40% de toda a madeira</div>
+                                <div class="stat-label">É utilizada para produção de papel no mundo</div>
+                            </div>
+                        </div>
+                        <div class="impact-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">26% dos aterros</div>
+                                <div class="stat-label">São ocupados por resíduos de papel não reciclado</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Eletrônicos -->
+                <div class="impact-card">
+                    <div class="impact-card-header" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
+                        <div class="impact-card-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <h2 class="impact-card-title">Eletrônicos</h2>
+                    </div>
+                    <div class="impact-card-body">
+                        <div class="impact-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-mountain"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">53.6 milhões de toneladas</div>
+                                <div class="stat-label">De lixo eletrônico gerado globalmente em 2023</div>
+                            </div>
+                        </div>
+                        <div class="impact-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-skull-crossbones"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">70% das toxinas</div>
+                                <div class="stat-label">Em aterros vêm de resíduos eletrônicos</div>
+                            </div>
+                        </div>
+                        <div class="impact-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">US$ 57 bilhões</div>
+                                <div class="stat-label">Em materiais recuperáveis são perdidos anualmente</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Metal -->
+                <div class="impact-card">
+                    <div class="impact-card-header" style="background: linear-gradient(135deg, #e67e22, #d35400);">
+                        <div class="impact-card-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <h2 class="impact-card-title">Metal</h2>
+                    </div>
+                    <div class="impact-card-body">
+                        <div class="impact-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">95% menos energia</div>
+                                <div class="stat-label">Reciclar alumínio consome comparado à produção primária</div>
+                            </div>
+                        </div>
+                        <div class="impact-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">97% menos emissões</div>
+                                <div class="stat-label">De gases de efeito estufa na reciclagem de metais</div>
+                            </div>
+                        </div>
+                        <div class="impact-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-infinity"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">Reciclagem infinita</div>
+                                <div class="stat-label">Metais podem ser reciclados indefinidamente sem perder qualidade</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Orgânico -->
+                <div class="impact-card">
+                    <div class="impact-card-header" style="background: linear-gradient(135deg, #16a085, #1abc9c);">
+                        <div class="impact-card-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h2 class="impact-card-title">Orgânico</h2>
+                    </div>
+                    <div class="impact-card-body">
+                        <div class="impact-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-temperature-high"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">25x mais potente</div>
+                                <div class="stat-label">O metano (de resíduos orgânicos) é pior que CO2 para o aquecimento global</div>
+                            </div>
+                        </div>
+                        <div class="impact-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">30% do lixo mundial</div>
+                                <div class="stat-label">É composto por resíduos orgânicos que poderiam ser compostados</div>
+                            </div>
+                        </div>
+                        <div class="impact-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">Redução de 50-70%</div>
+                                <div class="stat-label">No volume de resíduos através da compostagem</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Plástico -->
+                <div class="impact-card">
+                    <div class="impact-card-header" style="background: linear-gradient(135deg, #3498db, #2980b9);">
+                        <div class="impact-card-icon">
+                            <i class="fas fa-recycle"></i>
+                        </div>
+                        <h2 class="impact-card-title">Plástico</h2>
+                    </div>
+                    <div class="impact-card-body">
+                        <div class="impact-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-fish"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">8 milhões de toneladas</div>
+                                <div class="stat-label">De plástico chegam aos oceanos anualmente</div>
+                            </div>
+                        </div>
+                        <div class="impact-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-hourglass-half"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">450 anos</div>
+                                <div class="stat-label">Tempo que uma garrafa plástica leva para se decompor</div>
+                            </div>
+                        </div>
+                        <div class="impact-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-oil-can"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">8% do petróleo mundial</div>
+                                <div class="stat-label">É usado na produção de plásticos novos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Químico -->
+                <div class="impact-card">
+                    <div class="impact-card-header" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                        <div class="impact-card-icon">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h2 class="impact-card-title">Químico</h2>
+                    </div>
+                    <div class="impact-card-body">
+                        <div class="impact-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-radiation"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">10x mais tóxico</div>
+                                <div class="stat-label">Resíduos químicos podem contaminar solos e lençóis freáticos</div>
+                            </div>
+                        </div>
+                        <div class="impact-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-biohazard"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">400 milhões de toneladas</div>
+                                <div class="stat-label">De resíduos químicos perigosos gerados anualmente</div>
+                            </div>
+                        </div>
+                        <div class="impact-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-recycle"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">90% de redução</div>
+                                <div class="stat-label">No impacto ambiental com tratamento adequado</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vidro -->
+                <div class="impact-card">
+                    <div class="impact-card-header" style="background: linear-gradient(135deg, #95a5a6, #7f8c8d);">
+                        <div class="impact-card-icon">
+                            <i class="fas fa-wine-bottle"></i>
+                        </div>
+                        <h2 class="impact-card-title">Vidro</h2>
+                    </div>
+                    <div class="impact-card-body">
+                        <div class="impact-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-infinity"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">100% reciclável</div>
+                                <div class="stat-label">Infinitas vezes sem perder pureza ou qualidade</div>
+                            </div>
+                        </div>
+                        <div class="impact-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-temperature-high"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">30% menos energia</div>
+                                <div class="stat-label">Necessária para produzir vidro a partir de material reciclado</div>
+                            </div>
+                        </div>
+                        <div class="impact-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">1 milhão de anos</div>
+                                <div class="stat-label">Tempo que o vidro leva para se decompor na natureza</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Features -->
-    <section id="features" class="features">
-        <div class="container">
-            <div class="section-title animate">
-                <h2>Nossas Soluções</h2>
-                <p>Tecnologias inovadoras para transformar resíduos em recursos valiosos</p>
-            </div>
-
-            <div class="features-grid">
-                <div class="feature-card animate delay-1">
-                    <div class="feature-icon">
-                        <i class="fas fa-recycle"></i>
-                    </div>
-                    <h3>Reciclagem Inteligente</h3>
-                    <p>Sistemas automatizados que aumentam em 300% a eficiência da triagem de materiais recicláveis.</p>
+            
+            <div class="impact-chart-container">
+                <h3 class="chart-title">Composição do Lixo Mundial</h3>
+                <p class="chart-description">A distribuição dos diferentes tipos de resíduos na massa total de lixo produzido pela humanidade mostra a importância de soluções diversificadas para cada material</p>
+                
+                <!-- Espaço para um gráfico fictício - na implementação real seria um gráfico SVG ou imagem -->
+                <div style="background: #f5f5f5; height: 300px; display: flex; align-items: center; justify-content: center; border-radius: 8px; margin-bottom: 30px;">
+                    <p style="color: #7f8c8d;">[Gráfico ilustrativo da composição do lixo mundial]</p>
                 </div>
-
-                <div class="feature-card animate delay-2">
-                    <div class="feature-icon">
-                        <i class="fas fa-robot"></i>
+                
+                <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+                    <div style="margin: 10px; text-align: center;">
+                        <div style="width: 20px; height: 20px; background: #2ecc71; display: inline-block; margin-right: 5px;"></div>
+                        <span>Orgânicos (44%)</span>
                     </div>
-                    <h3>IA na Triagem</h3>
-                    <p>Inteligência Artificial que identifica e classifica resíduos com precisão nunca antes vista.</p>
-                </div>
-
-                <div class="feature-card animate delay-3">
-                    <div class="feature-icon">
-                        <i class="fas fa-leaf"></i>
+                    <div style="margin: 10px; text-align: center;">
+                        <div style="width: 20px; height: 20px; background: #3498db; display: inline-block; margin-right: 5px;"></div>
+                        <span>Plásticos (12%)</span>
                     </div>
-                    <h3>Compostagem Industrial</h3>
-                    <p>Tecnologia acelerada que transforma resíduos orgânicos em adubo em apenas 24 horas.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section id="innovation" class="innovation">
-        <div class="container">
-            <div class="section-title animate">
-                <h2>Tecnologias Inovadoras</h2>
-                <p>Conheça nossos métodos revolucionários de reciclagem e redução de resíduos</p>
-            </div>
-
-            <div class="innovation-grid">
-                <div class="innovation-card animate delay-1">
-                    <div class="innovation-img">
-                        <img src="https://images.unsplash.com/photo-1684853807644-428f89ce35fc?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Reciclagem Química">
+                    <div style="margin: 10px; text-align: center;">
+                        <div style="width: 20px; height: 20px; background: #e67e22; display: inline-block; margin-right: 5px;"></div>
+                        <span>Metais (8%)</span>
                     </div>
-                    <div class="innovation-content">
-                        <h3>Reciclagem Química</h3>
-                        <p>Processo inovador que decompõe plásticos em seus componentes moleculares básicos para recriação de novos materiais.</p>
-                        <a href="#" class="innovation-link">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                    <div style="margin: 10px; text-align: center;">
+                        <div style="width: 20px; height: 20px; background: #95a5a6; display: inline-block; margin-right: 5px;"></div>
+                        <span>Vidro (5%)</span>
                     </div>
-                </div>
-
-                <div class="innovation-card animate delay-2">
-                    <div class="innovation-img">
-                        <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Biodegradação">
+                    <div style="margin: 10px; text-align: center;">
+                        <div style="width: 20px; height: 20px; background: #9b59b6; display: inline-block; margin-right: 5px;"></div>
+                        <span>Eletrônicos (4%)</span>
                     </div>
-                    <div class="innovation-content">
-                        <h3>Biodegradação Acelerada</h3>
-                        <p>Microrganismos especializados que reduzem o tempo de decomposição de materiais orgânicos em até 90%.</p>
-                        <a href="#" class="innovation-link">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                    <div style="margin: 10px; text-align: center;">
+                        <div style="width: 20px; height: 20px; background: #f1c40f; display: inline-block; margin-right: 5px;"></div>
+                        <span>Papel (17%)</span>
                     </div>
-                </div>
-
-                <div class="innovation-card animate delay-3">
-                    <div class="innovation-img">
-                        <img src="https://images.unsplash.com/photo-1593775832814-3a7829380c7a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Upcycling">
+                    <div style="margin: 10px; text-align: center;">
+                        <div style="width: 20px; height: 20px; background: #e74c3c; display: inline-block; margin-right: 5px;"></div>
+                        <span>Químicos (3%)</span>
                     </div>
-                    <div class="innovation-content">
-                        <h3>Upcycling Industrial</h3>
-                        <p>Técnicas avançadas para transformar resíduos em produtos de maior valor e qualidade.</p>
-                        <a href="#" class="innovation-link">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                    <div style="margin: 10px; text-align: center;">
+                        <div style="width: 20px; height: 20px; background: #34495e; display: inline-block; margin-right: 5px;"></div>
+                        <span>Outros (7%)</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta">
-        <div class="container">
-            <div class="animate">
-                <h2>Pronto para fazer parte da mudança?</h2>
-                <p>Junte-se a milhares de empresas e pessoas que já estão transformando seus resíduos em oportunidades.</p>
-                <a href="/nossa-ajuda.html" class="btn">Comece Agora</a>
+            
+            <div class="impact-cta">
+                <h3 class="cta-title">Faça parte da mudança!</h3>
+                <p class="cta-text">Cada pequena ação conta quando se trata de reduzir nosso impacto ambiental. Comece hoje mesmo a separar seus resíduos e utilize nossos serviços de reciclagem.</p>
+                <a href="solucoes.html" class="btn btn-light" style="padding: 12px 30px; font-size: 1.1rem;">
+                    <i class="fas fa-hands-helping"></i> Como Posso Ajudar?
+                </a>
             </div>
         </div>
     </section>
@@ -162,7 +545,7 @@
                     <ul class="footer-links">
                         <li><a href="index.html">Início</a></li>
                         <li><a href="solucoes.html">Soluções</a></li>
-                        <li><a href="inovacao.html">Tecnologia</a></li>
+                        <li><a href="inovacao.html">Inovação</a></li>
                         <li><a href="nossa-ajuda.html">Nossa Ajuda</a></li>
                         <li><a href="impactos.html">Impacto</a></li>
                         <li><a href="contato.html">Contato</a></li>
@@ -231,48 +614,6 @@
                     }
                 }
             });
-        });
-
-        // Counter Animation
-        const counters = document.querySelectorAll('.counter');
-        const speed = 200;
-
-        function animateCounters() {
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                const increment = target / speed;
-
-                if (count < target) {
-                    counter.innerText = Math.ceil(count + increment);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
-
-        // Intersection Observer for Animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate');
-                    
-                    // Start counters when stats section is visible
-                    if (entry.target.id === 'stats') {
-                        animateCounters();
-                    }
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Observe all sections
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
         });
 
         // Form Submission
