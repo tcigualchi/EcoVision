@@ -367,14 +367,12 @@
         </div>
     </section>
 
-   <footer id="contact">
+<!-- Footer -->
+<footer id="contact">
     <div class="container">
         <div class="footer-content">
             <div class="footer-col">
-                <div class="footer-logo">
-                    <img src="icon.png" alt="EcoVision Logo">
-                    <span class="logo-text">EcoVision</span>
-                </div>
+                <h3>Sobre Nós</h3>
                 <p>A EcoVision lidera a revolução da reciclagem no Brasil com tecnologia de ponta e soluções sustentáveis.</p>
             </div>
 
@@ -396,6 +394,64 @@
         </div>
     </div>
 </footer>
+
+<!-- Scripts (mantendo a parte de IA e processamento de imagens) -->
+<script>
+    // Mobile Menu Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        menuToggle.innerHTML = navLinks.classList.contains('active') ? 
+            '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    });
+
+    // Sticky Header
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('header');
+        header.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Seção de IA para processamento de imagens (mantida)
+    document.addEventListener('DOMContentLoaded', function() {
+        // Inicializa a webcam
+        const webcamElement = document.getElementById('webcam');
+        const canvasElement = document.getElementById('canvas');
+        const webcam = new Webcam(webcamElement, 'user', canvasElement);
+        
+        // Controles de webcam e upload
+        document.getElementById('webcam-btn').addEventListener('click', function() {
+            webcam.start()
+                .then(result => {
+                    console.log("Webcam iniciada");
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        });
+
+        document.getElementById('capture-btn').addEventListener('click', function() {
+            let picture = webcam.snap();
+            document.getElementById('image-preview').src = picture;
+            // Aqui você adicionaria o código para processar a imagem
+        });
+
+        document.getElementById('upload-btn').addEventListener('change', function(e) {
+            if(e.target.files.length) {
+                let file = e.target.files[0];
+                let reader = new FileReader();
+                
+                reader.onload = function(event) {
+                    document.getElementById('image-preview').src = event.target.result;
+                    // Aqui você adicionaria o código para processar a imagem enviada
+                };
+                
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
