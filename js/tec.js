@@ -256,33 +256,48 @@ function hideCameraControls() {
 async function startWebcam() {
   try {
     clearResults();
-    
-    const flip = appState.currentCamera === 'user'; // Flip apenas para câmera frontal
-    appState.webcam = new tmImage.Webcam(400, 400, flip);
+
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    const videoDevices = devices.filter(device => device.kind === 'videoinput');
+
+    let selectedDeviceId = null;
+
+    if (videoDevices.length > 1) {
+      // Se houver mais de uma câmera, escolher pela heurística
+      const preferred = appState.currentCamera === 'environment'
+        ? videoDevices.find(d => d.label.toLowerCase().includes('back'))
+        : videoDevices.find(d => d.label.toLowerCase().includes('front'));
+
+      selectedDeviceId = preferred?.deviceId || videoDevices[0].deviceId;
+    } else if (videoDevices.length === 1) {
+      selectedDeviceId = videoDevices[0].deviceId;
+    }
+
+    if (!selectedDeviceId) {
+      alert("Não foi possível identificar a câmera desejada.");
+      return;
+    }
 
     const constraints = {
       video: {
-        facingMode: appState.currentCamera,
+        deviceId: { exact: selectedDeviceId },
         width: { ideal: 400 },
         height: { ideal: 400 }
       },
       audio: false
     };
-    
+
+    const flip = appState.currentCamera === 'user';
+    appState.webcam = new tmImage.Webcam(400, 400, flip);
+
     await appState.webcam.setup(constraints);
     await appState.webcam.play();
 
-    // Capturar stream de vídeo com segurança
     const stream = appState.webcam.webcam?.srcObject;
     if (stream) {
       appState.stream = stream;
       const tracks = stream.getVideoTracks();
-      if (tracks.length > 0) {
-        appState.track = tracks[0];
-      } else {
-        console.warn("Nenhuma track de vídeo encontrada.");
-        appState.track = null;
-      }
+      appState.track = tracks[0] || null;
     } else {
       console.warn("Stream não disponível após setup.");
       appState.stream = null;
@@ -298,10 +313,11 @@ async function startWebcam() {
 
     window.requestAnimationFrame(webcamLoop);
   } catch (error) {
-    console.error('Erro ao iniciar webcam:', error);
+    console.error("Erro ao iniciar webcam:", error);
     throw error;
   }
 }
+
 
 async function webcamLoop() {
   try {
