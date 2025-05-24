@@ -30,7 +30,8 @@ const appState = {
   currentFacingMode: 'environment', // 'environment' (traseira) ou 'user' (frontal)
   isFlashOn: false,
   stream: null,
-  track: null
+  track: null,
+  videoDevices: []
 };
 
 // =============================================
@@ -54,6 +55,9 @@ async function initializeApp() {
   
   // Inicializar container de resultados
   initLabelContainer();
+  
+  // Enumerar dispositivos de câmera disponíveis
+  await enumerateCameras();
 }
 
 function handleInitializationError(error) {
@@ -123,6 +127,25 @@ function initLabelContainer() {
     domElements.labelContainer = document.createElement('div');
     domElements.labelContainer.id = 'label-container';
     document.querySelector('.ai-controls')?.appendChild(domElements.labelContainer);
+  }
+}
+
+// =============================================
+// ENUMERAÇÃO DE CÂMERAS DISPONÍVEIS
+// =============================================
+async function enumerateCameras() {
+  try {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+      console.warn('enumerateDevices() não suportado');
+      return;
+    }
+    
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    appState.videoDevices = devices.filter(device => device.kind === 'videoinput');
+    
+    console.log('Câmeras disponíveis:', appState.videoDevices);
+  } catch (error) {
+    console.error('Erro ao enumerar câmeras:', error);
   }
 }
 
@@ -257,19 +280,32 @@ async function startWebcam() {
   try {
     clearResults();
 
-    // Verificar se o navegador suporta getUserMedia
+    // Verificar suporte
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       throw new Error('Seu navegador não suporta acesso à câmera ou o recurso está desativado');
     }
 
+    // Configurações da câmera
     const constraints = {
       video: {
-        facingMode: appState.currentFacingMode,
         width: { ideal: 400 },
-        height: { ideal: 400 }
+        height: { ideal: 400 },
+        facingMode: appState.currentFacingMode
       },
       audio: false
     };
+
+    // Se temos dispositivos enumerados, usar deviceId exato
+    if (appState.videoDevices.length > 0) {
+      const deviceId = appState.currentFacingMode === 'environment' 
+        ? findBackCameraId() 
+        : findFrontCameraId();
+      
+      if (deviceId) {
+        constraints.video.deviceId = { exact: deviceId };
+        delete constraints.video.facingMode;
+      }
+    }
 
     const flip = appState.currentFacingMode === 'user';
     appState.webcam = new tmImage.Webcam(400, 400, flip);
@@ -280,10 +316,6 @@ async function startWebcam() {
     if (stream) {
       appState.stream = stream;
       appState.track = stream.getVideoTracks()[0] || null;
-    } else {
-      console.warn("Stream não disponível após setup.");
-      appState.stream = null;
-      appState.track = null;
     }
 
     appState.isWebcamActive = true;
@@ -298,6 +330,25 @@ async function startWebcam() {
     console.error("Erro ao iniciar webcam:", error);
     alert("Erro ao iniciar webcam: " + error.message);
   }
+}
+
+function findBackCameraId() {
+  // Tenta encontrar câmera traseira pelo label
+  const backCamera = appState.videoDevices.find(device => 
+    device.label.toLowerCase().includes('back') || 
+    device.label.toLowerCase().includes('rear') ||
+    device.label.toLowerCase().includes('environment')
+  );
+  return backCamera?.deviceId || appState.videoDevices[0]?.deviceId;
+}
+
+function findFrontCameraId() {
+  // Tenta encontrar câmera frontal pelo label
+  const frontCamera = appState.videoDevices.find(device => 
+    device.label.toLowerCase().includes('front') || 
+    device.label.toLowerCase().includes('user')
+  );
+  return frontCamera?.deviceId || appState.videoDevices[0]?.deviceId;
 }
 
 async function webcamLoop() {
