@@ -259,8 +259,7 @@ async function startWebcam() {
     
     const flip = appState.currentCamera === 'user'; // Flip apenas para câmera frontal
     appState.webcam = new tmImage.Webcam(400, 400, flip);
-    
-    // Configurações adicionais para seleção de câmera
+
     const constraints = {
       video: {
         facingMode: appState.currentCamera,
@@ -273,26 +272,30 @@ async function startWebcam() {
     await appState.webcam.setup(constraints);
     await appState.webcam.play();
 
+    // Capturar stream de vídeo com segurança
     const stream = appState.webcam.webcam?.srcObject;
-      if (stream) {
-        appState.stream = stream;
-        appState.track = stream.getVideoTracks()[0];
+    if (stream) {
+      appState.stream = stream;
+      const tracks = stream.getVideoTracks();
+      if (tracks.length > 0) {
+        appState.track = tracks[0];
       } else {
-        console.warn("Stream não disponível após setup");
+        console.warn("Nenhuma track de vídeo encontrada.");
+        appState.track = null;
       }
+    } else {
+      console.warn("Stream não disponível após setup.");
+      appState.stream = null;
+      appState.track = null;
+    }
 
-    
-    // Armazenar a stream para controle posterior
-    appState.stream = appState.webcam.canvas?.srcObject || null;
-    appState.track = appState.stream.getVideoTracks()[0];
-    
     appState.isWebcamActive = true;
-    
+
     if (domElements.webcamContainer) {
       domElements.webcamContainer.innerHTML = '';
       domElements.webcamContainer.appendChild(appState.webcam.canvas);
     }
-    
+
     window.requestAnimationFrame(webcamLoop);
   } catch (error) {
     console.error('Erro ao iniciar webcam:', error);
