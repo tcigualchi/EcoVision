@@ -439,18 +439,42 @@ input{
 }
 
 /* Footer */
-/* Footer */
 footer {
     background: var(--dark);
     color: white;
     padding: 80px 0 0;
+    position: relative;
 }
 
 .footer-content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 50px;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
     margin-bottom: 50px;
+}
+
+.footer-col {
+    position: relative;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.footer-logo img {
+    height: 40px;
+}
+
+.footer-logo .logo-text {
+    font-size: 24px;
+    font-weight: 700;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 .footer-col h3 {
@@ -458,6 +482,7 @@ footer {
     margin-bottom: 25px;
     position: relative;
     padding-bottom: 15px;
+    color: white;
 }
 
 .footer-col h3::after {
@@ -473,14 +498,19 @@ footer {
 .footer-col p {
     margin-bottom: 20px;
     opacity: 0.8;
+    max-width: 400px;
+    line-height: 1.6;
 }
 
 .footer-links {
     list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px 30px;
 }
 
 .footer-links li {
-    margin-bottom: 15px;
+    margin-bottom: 0;
 }
 
 .footer-links a {
@@ -488,19 +518,38 @@ footer {
     text-decoration: none;
     transition: var(--transition);
     display: inline-block;
+    font-size: 16px;
+    padding: 5px 0;
 }
 
 .footer-links a:hover {
-    color: var(--primary);
+    color: var(--primary-light);
     transform: translateX(5px);
 }
 
 .footer-bottom {
     text-align: center;
-    padding: 20px 0;
+    padding: 30px 0;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 14px;
+    opacity: 0.8;
 }
 
+/* Responsivo */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .footer-links {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-col p {
+        max-width: 100%;
+    }
+}
 /* Animations */
 @keyframes fadeInUp {
     from {
