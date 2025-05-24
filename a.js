@@ -1,3 +1,6 @@
+
+// tec.js - versão com controle manual de câmera e integração com modelo Teachable Machine
+
 const MODEL_URL = "https://teachablemachine.withgoogle.com/models/h245knWf6/";
 
 const domElements = {
