@@ -27,7 +27,7 @@ const appState = {
   maxPredictions: 0,
   isWebcamActive: false,
   isModelLoaded: false,
-  currentCamera: 'environment', // 'environment' (traseira) ou 'user' (frontal)
+  currentFacingMode: 'environment', // 'environment' (traseira) ou 'user' (frontal)
   isFlashOn: false,
   stream: null,
   track: null
@@ -240,7 +240,7 @@ function showCameraControls() {
     domElements.switchCameraBtn.style.display = 'inline-block';
   }
   if (domElements.toggleFlashBtn) {
-    domElements.toggleFlashBtn.style.display = appState.currentCamera === 'environment' ? 'inline-block' : 'none';
+    domElements.toggleFlashBtn.style.display = appState.currentFacingMode === 'environment' ? 'inline-block' : 'none';
   }
 }
 
@@ -257,39 +257,21 @@ async function startWebcam() {
   try {
     clearResults();
 
-    // Forçar o navegador a pedir permissão primeiro
-    await navigator.mediaDevices.getUserMedia({ video: true });
-
-    const devices = await navigator.mediaDevices.enumerateDevices();
-    const videoDevices = devices.filter(device => device.kind === 'videoinput');
-
-    let selectedDeviceId = null;
-
-    if (videoDevices.length > 1) {
-      const preferred = appState.currentCamera === 'environment'
-        ? videoDevices.find(d => d.label.toLowerCase().includes('back'))
-        : videoDevices.find(d => d.label.toLowerCase().includes('front'));
-
-      selectedDeviceId = preferred?.deviceId || videoDevices[0].deviceId;
-    } else if (videoDevices.length === 1) {
-      selectedDeviceId = videoDevices[0].deviceId;
-    }
-
-    if (!selectedDeviceId) {
-      alert("Não foi possível identificar a câmera desejada.");
-      return;
+    // Verificar se o navegador suporta getUserMedia
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      throw new Error('Seu navegador não suporta acesso à câmera ou o recurso está desativado');
     }
 
     const constraints = {
       video: {
-        deviceId: { exact: selectedDeviceId },
+        facingMode: appState.currentFacingMode,
         width: { ideal: 400 },
         height: { ideal: 400 }
       },
       audio: false
     };
 
-    const flip = appState.currentCamera === 'user';
+    const flip = appState.currentFacingMode === 'user';
     appState.webcam = new tmImage.Webcam(400, 400, flip);
     await appState.webcam.setup(constraints);
     await appState.webcam.play();
@@ -317,7 +299,6 @@ async function startWebcam() {
     alert("Erro ao iniciar webcam: " + error.message);
   }
 }
-
 
 async function webcamLoop() {
   try {
@@ -384,17 +365,17 @@ async function switchCamera() {
     if (!appState.isWebcamActive) return;
     
     // Alternar entre câmeras
-    appState.currentCamera = appState.currentCamera === 'user' ? 'environment' : 'user';
+    appState.currentFacingMode = appState.currentFacingMode === 'user' ? 'environment' : 'user';
     
     // Atualizar texto do botão
     if (domElements.switchCameraBtn) {
-      const icon = appState.currentCamera === 'user' ? 'fa-camera' : 'fa-camera-retro';
+      const icon = appState.currentFacingMode === 'user' ? 'fa-user' : 'fa-camera';
       domElements.switchCameraBtn.innerHTML = `<i class="fas ${icon}"></i> Alternar Câmera`;
     }
     
     // Atualizar visibilidade do botão de flash
     if (domElements.toggleFlashBtn) {
-      domElements.toggleFlashBtn.style.display = appState.currentCamera === 'environment' ? 'inline-block' : 'none';
+      domElements.toggleFlashBtn.style.display = appState.currentFacingMode === 'environment' ? 'inline-block' : 'none';
       // Desligar flash ao alternar câmeras
       if (appState.isFlashOn) {
         await toggleFlash(false);
@@ -413,7 +394,7 @@ async function switchCamera() {
 async function toggleFlash(forceState = null) {
   try {
     // Verificar se a câmera traseira está ativa
-    if (appState.currentCamera !== 'environment') {
+    if (appState.currentFacingMode !== 'environment') {
       alert('Flash disponível apenas na câmera traseira');
       return;
     }
