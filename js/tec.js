@@ -14,8 +14,6 @@ const domElements = {
   imagePreview: document.getElementById('image-preview'),
   analyzeBtn: document.getElementById('analyze-btn'),
   startWebcamBtn: document.getElementById('start-webcam-btn'),
-  switchCameraBtn: document.getElementById('switch-camera-btn'),
-  toggleFlashBtn: document.getElementById('toggle-flash-btn'),
   labelContainer: document.getElementById('label-container'),
   webcamContainer: document.getElementById('webcam-container')
 };
@@ -27,10 +25,7 @@ const appState = {
   maxPredictions: 0,
   isWebcamActive: false,
   isModelLoaded: false,
-  currentCamera: 'environment', // 'environment' (traseira) ou 'user' (frontal)
-  isFlashOn: false,
-  stream: null,
-  track: null
+  stream: null
 };
 
 // =============================================
@@ -213,11 +208,9 @@ async function toggleWebcam() {
     if (appState.isWebcamActive) {
       await stopWebcam();
       updateWebcamButton(false);
-      hideCameraControls();
     } else {
       await startWebcam();
       updateWebcamButton(true);
-      showCameraControls();
     }
   } catch (error) {
     console.error('Erro ao alternar webcam:', error);
@@ -225,73 +218,30 @@ async function toggleWebcam() {
   }
 }
 
-function showCameraControls() {
-  if (domElements.switchCameraBtn) {
-    domElements.switchCameraBtn.style.display = 'inline-block';
-  }
-  if (domElements.toggleFlashBtn) {
-    domElements.toggleFlashBtn.style.display = appState.currentCamera === 'environment' ? 'inline-block' : 'none';
-  }
-}
-
-function hideCameraControls() {
-  if (domElements.switchCameraBtn) {
-    domElements.switchCameraBtn.style.display = 'none';
-  }
-  if (domElements.toggleFlashBtn) {
-    domElements.toggleFlashBtn.style.display = 'none';
-  }
-}
-
 async function startWebcam() {
   try {
     clearResults();
 
-    // Forçar o navegador a pedir permissão primeiro
-    await navigator.mediaDevices.getUserMedia({ video: true });
-
-    const devices = await navigator.mediaDevices.enumerateDevices();
-    const videoDevices = devices.filter(device => device.kind === 'videoinput');
-
-    let selectedDeviceId = null;
-
-    if (videoDevices.length > 1) {
-      const preferred = appState.currentCamera === 'environment'
-        ? videoDevices.find(d => d.label.toLowerCase().includes('back'))
-        : videoDevices.find(d => d.label.toLowerCase().includes('front'));
-
-      selectedDeviceId = preferred?.deviceId || videoDevices[0].deviceId;
-    } else if (videoDevices.length === 1) {
-      selectedDeviceId = videoDevices[0].deviceId;
-    }
-
-    if (!selectedDeviceId) {
-      alert("Não foi possível identificar a câmera desejada.");
-      return;
+    // Verificar suporte
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      throw new Error('Seu navegador não suporta acesso à câmera ou o recurso está desativado');
     }
 
     const constraints = {
       video: {
-        deviceId: { exact: selectedDeviceId },
         width: { ideal: 400 },
         height: { ideal: 400 }
       },
       audio: false
     };
 
-    const flip = appState.currentCamera === 'user';
-    appState.webcam = new tmImage.Webcam(400, 400, flip);
+    appState.webcam = new tmImage.Webcam(400, 400, false); // Sem flip
     await appState.webcam.setup(constraints);
     await appState.webcam.play();
 
     const stream = appState.webcam.webcam?.srcObject;
     if (stream) {
       appState.stream = stream;
-      appState.track = stream.getVideoTracks()[0] || null;
-    } else {
-      console.warn("Stream não disponível após setup.");
-      appState.stream = null;
-      appState.track = null;
     }
 
     appState.isWebcamActive = true;
@@ -307,7 +257,6 @@ async function startWebcam() {
     alert("Erro ao iniciar webcam: " + error.message);
   }
 }
-
 
 async function webcamLoop() {
   try {
@@ -343,10 +292,8 @@ async function stopWebcam() {
     if (appState.stream) {
       appState.stream.getTracks().forEach(track => track.stop());
       appState.stream = null;
-      appState.track = null;
     }
     appState.isWebcamActive = false;
-    appState.isFlashOn = false;
     
     if (domElements.webcamContainer) {
       domElements.webcamContainer.innerHTML = '';
