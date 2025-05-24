@@ -674,6 +674,33 @@ footer {
 }
 
 /* Webcam e Upload */
+
+.webcam-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.webcam-controls .btn-option {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+}
+
+#webcam-container {
+    margin-top: 15px;
+    width: 100%;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#webcam-container canvas {
+    border-radius: 8px;
+    border: 3px solid #2ecc71;
+}
+
 #webcam-container, #image-preview-container {
     width: 100%;
     max-width: 500px;

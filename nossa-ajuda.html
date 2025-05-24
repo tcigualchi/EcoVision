@@ -8,9 +8,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/x-icon" href="icon.png">
-
 </head>
-<section>
+<body>
     <!-- Header -->
     <header id="header">
         <div class="container">
@@ -27,7 +26,6 @@
                     <li><a href="nossa-ajuda.html" class="active">Nossa Ajuda</a></li>
                     <li><a href="impactos.html">Impacto</a></li>
                 </ul>
-
 
                 <div class="menu-toggle">
                     <i class="fas fa-bars"></i>
@@ -60,9 +58,17 @@
                 </div>
                 
                 <div id="webcam-section">
-                    <button type="button" onclick="initWebcam()" class="start-btn">
-                        <i class="fas fa-play"></i> Iniciar Câmera
-                    </button>
+                    <div class="webcam-controls">
+                        <button type="button" id="start-webcam-btn" class="start-btn">
+                            <i class="fas fa-play"></i> Iniciar Câmera
+                        </button>
+                        <button type="button" id="switch-camera-btn" class="btn-option" style="display: none;">
+                            <i class="fas fa-camera-retro"></i> Alternar Câmera
+                        </button>
+                        <button type="button" id="toggle-flash-btn" class="btn-option" style="display: none;">
+                            <i class="fas fa-lightbulb"></i> Ligar Flash
+                        </button>
+                    </div>
                     <div id="webcam-container"></div>
                 </div>
                 
@@ -77,13 +83,6 @@
             <div id="label-container"></div>
         </div>
     </section>
-
-    <script src="js/tec.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
-    
-
-</section>
 
     <!-- Footer -->
     <footer id="contact">
@@ -134,6 +133,10 @@
         </div>
     </footer>
 
+    <script src="js/tec.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    
     <script>
         // Mobile Menu Toggle
         const menuToggle = document.querySelector('.menu-toggle');
@@ -173,48 +176,6 @@
                     }
                 }
             });
-        });
-
-        // Counter Animation
-        const counters = document.querySelectorAll('.counter');
-        const speed = 200;
-
-        function animateCounters() {
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                const increment = target / speed;
-
-                if (count < target) {
-                    counter.innerText = Math.ceil(count + increment);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
-
-        // Intersection Observer for Animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate');
-                    
-                    // Start counters when stats section is visible
-                    if (entry.target.id === 'stats') {
-                        animateCounters();
-                    }
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Observe all sections
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
         });
 
         // Form Submission

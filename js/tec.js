@@ -14,6 +14,8 @@ const domElements = {
   imagePreview: document.getElementById('image-preview'),
   analyzeBtn: document.getElementById('analyze-btn'),
   startWebcamBtn: document.getElementById('start-webcam-btn'),
+  switchCameraBtn: document.getElementById('switch-camera-btn'),
+  toggleFlashBtn: document.getElementById('toggle-flash-btn'),
   labelContainer: document.getElementById('label-container'),
   webcamContainer: document.getElementById('webcam-container')
 };
@@ -24,7 +26,11 @@ const appState = {
   webcam: null,
   maxPredictions: 0,
   isWebcamActive: false,
-  isModelLoaded: false
+  isModelLoaded: false,
+  currentCamera: 'environment', // 'environment' (traseira) ou 'user' (frontal)
+  isFlashOn: false,
+  stream: null,
+  track: null
 };
 
 // =============================================
@@ -95,6 +101,16 @@ function setupEventListeners() {
   // Controle da webcam
   if (domElements.startWebcamBtn) {
     domElements.startWebcamBtn.addEventListener('click', toggleWebcam);
+  }
+  
+  // Alternar câmera
+  if (domElements.switchCameraBtn) {
+    domElements.switchCameraBtn.addEventListener('click', switchCamera);
+  }
+  
+  // Controlar flash
+  if (domElements.toggleFlashBtn) {
+    domElements.toggleFlashBtn.addEventListener('click', toggleFlash);
   }
   
   // Parar webcam ao sair da página
@@ -207,9 +223,11 @@ async function toggleWebcam() {
     if (appState.isWebcamActive) {
       await stopWebcam();
       updateWebcamButton(false);
+      hideCameraControls();
     } else {
       await startWebcam();
       updateWebcamButton(true);
+      showCameraControls();
     }
   } catch (error) {
     console.error('Erro ao alternar webcam:', error);
@@ -217,15 +235,47 @@ async function toggleWebcam() {
   }
 }
 
+function showCameraControls() {
+  if (domElements.switchCameraBtn) {
+    domElements.switchCameraBtn.style.display = 'inline-block';
+  }
+  if (domElements.toggleFlashBtn) {
+    domElements.toggleFlashBtn.style.display = appState.currentCamera === 'environment' ? 'inline-block' : 'none';
+  }
+}
+
+function hideCameraControls() {
+  if (domElements.switchCameraBtn) {
+    domElements.switchCameraBtn.style.display = 'none';
+  }
+  if (domElements.toggleFlashBtn) {
+    domElements.toggleFlashBtn.style.display = 'none';
+  }
+}
+
 async function startWebcam() {
   try {
     clearResults();
     
-    const flip = true;
+    const flip = appState.currentCamera === 'user'; // Flip apenas para câmera frontal
     appState.webcam = new tmImage.Webcam(400, 400, flip);
     
-    await appState.webcam.setup();
+    // Configurações adicionais para seleção de câmera
+    const constraints = {
+      video: {
+        facingMode: appState.currentCamera,
+        width: { ideal: 400 },
+        height: { ideal: 400 }
+      },
+      audio: false
+    };
+    
+    await appState.webcam.setup(constraints);
     await appState.webcam.play();
+    
+    // Armazenar a stream para controle posterior
+    appState.stream = appState.webcam.video.srcObject;
+    appState.track = appState.stream.getVideoTracks()[0];
     
     appState.isWebcamActive = true;
     
@@ -272,7 +322,13 @@ async function stopWebcam() {
       await appState.webcam.stop();
       appState.webcam = null;
     }
+    if (appState.stream) {
+      appState.stream.getTracks().forEach(track => track.stop());
+      appState.stream = null;
+      appState.track = null;
+    }
     appState.isWebcamActive = false;
+    appState.isFlashOn = false;
     
     if (domElements.webcamContainer) {
       domElements.webcamContainer.innerHTML = '';
@@ -292,6 +348,78 @@ function updateWebcamButton(isActive) {
       domElements.startWebcamBtn.innerHTML = '<i class="fas fa-play"></i> Iniciar Câmera';
       domElements.startWebcamBtn.classList.remove('active');
     }
+  }
+}
+
+async function switchCamera() {
+  try {
+    if (!appState.isWebcamActive) return;
+    
+    // Alternar entre câmeras
+    appState.currentCamera = appState.currentCamera === 'user' ? 'environment' : 'user';
+    
+    // Atualizar texto do botão
+    if (domElements.switchCameraBtn) {
+      const icon = appState.currentCamera === 'user' ? 'fa-camera' : 'fa-camera-retro';
+      domElements.switchCameraBtn.innerHTML = `<i class="fas ${icon}"></i> Alternar Câmera`;
+    }
+    
+    // Atualizar visibilidade do botão de flash
+    if (domElements.toggleFlashBtn) {
+      domElements.toggleFlashBtn.style.display = appState.currentCamera === 'environment' ? 'inline-block' : 'none';
+      // Desligar flash ao alternar câmeras
+      if (appState.isFlashOn) {
+        await toggleFlash(false);
+      }
+    }
+    
+    // Reiniciar a webcam com a nova câmera
+    await stopWebcam();
+    await startWebcam();
+  } catch (error) {
+    console.error('Erro ao alternar câmera:', error);
+    alert('Erro ao alternar câmera: ' + error.message);
+  }
+}
+
+async function toggleFlash(forceState = null) {
+  try {
+    // Verificar se a câmera traseira está ativa
+    if (appState.currentCamera !== 'environment') {
+      alert('Flash disponível apenas na câmera traseira');
+      return;
+    }
+    
+    // Determinar novo estado
+    const newState = forceState !== null ? forceState : !appState.isFlashOn;
+    
+    // Aplicar configurações de flash (se suportado)
+    if (appState.track && typeof appState.track.applyConstraints === 'function') {
+      try {
+        await appState.track.applyConstraints({
+          advanced: [{ torch: newState }]
+        });
+        appState.isFlashOn = newState;
+      } catch (flashError) {
+        console.warn('Flash não suportado ou erro ao ativar:', flashError);
+        appState.isFlashOn = false;
+      }
+    }
+    
+    // Atualizar botão
+    if (domElements.toggleFlashBtn) {
+      const icon = appState.isFlashOn ? 'fa-lightbulb' : 'fa-lightbulb';
+      const text = appState.isFlashOn ? 'Desligar Flash' : 'Ligar Flash';
+      domElements.toggleFlashBtn.innerHTML = `<i class="fas ${icon}"></i> ${text}`;
+    }
+    
+    // Feedback visual quando não suportado
+    if (!appState.isFlashOn && forceState === null) {
+      alert('Seu dispositivo não suporta flash ou não foi possível ativá-lo');
+    }
+  } catch (error) {
+    console.error('Erro ao controlar flash:', error);
+    appState.isFlashOn = false;
   }
 }
 
