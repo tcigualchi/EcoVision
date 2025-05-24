@@ -173,7 +173,7 @@ header.scrolled {
     height: 100vh;
     display: flex;
     align-items: center;
-    background: url('back.avif') no-repeat center center/cover;
+    background: url('https://tcigualchi.github.io/EcoVision/back.avif') no-repeat center center/cover;
     position: relative;
     color: white;
     text-align: center;
