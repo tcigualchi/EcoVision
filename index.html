@@ -141,146 +141,32 @@
     </section>
 
     <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-col">
-                    <h3>Sobre Nós</h3>
-                    <p>A EcoVision lidera a revolução da reciclagem no Brasil com tecnologia de ponta e soluções sustentáveis.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-
-                <div class="footer-col">
-                    <h3>Links Rápidos</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Início</a></li>
-                        <li><a href="solucoes.html">Soluções</a></li>
-                        <li><a href="inovacao.html">Tecnologia</a></li>
-                        <li><a href="nossa-ajuda.html">Nossa Ajuda</a></li>
-                        <li><a href="impactos.html">Impacto</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h3>Contato</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Av. Sustentabilidade, 123 - São Paulo, SP</p>
-                    <p><i class="fas fa-phone"></i> (11) 98765-4321</p>
-                    <p><i class="fas fa-envelope"></i> contato@ecovision.com.br</p>
-                </div>
-
-                <div class="footer-col">
-                    <h3>Newsletter</h3>
-                    <p>Assine para receber nossas atualizações e dicas sustentáveis.</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Seu e-mail" required>
-                        <button type="submit" class="btn btn-primary">Assinar</button>
-                    </form>
-                </div>
+<footer id="contact">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Sobre Nós</h3>
+                <p>A EcoVision lidera a revolução da reciclagem no Brasil com tecnologia de ponta e soluções sustentáveis.</p>
             </div>
 
-            <div class="footer-bottom">
-                <p>&copy; 2025 EcoVision. Todos os direitos reservados.</p>
+            <div class="footer-col">
+                <h3>Links Rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="solucoes.html">Soluções</a></li>
+                    <li><a href="inovacao.html">Tecnologia</a></li>
+                    <li><a href="nossa-ajuda.html">Nossa Ajuda</a></li>
+                    <li><a href="impactos.html">Impacto</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
             </div>
         </div>
-    </footer>
 
-    <script>
-        // Mobile Menu Toggle
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
+        <div class="footer-bottom">
+            <p>&copy; 2025 EcoVision. Todos os direitos reservados.</p>
+        </div>
+    </div>
+</footer>
 
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            menuToggle.innerHTML = navLinks.classList.contains('active') ? 
-                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-        });
-
-        // Sticky Header
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            header.classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        // Smooth Scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-
-                    // Close mobile menu if open
-                    if (navLinks.classList.contains('active')) {
-                        navLinks.classList.remove('active');
-                        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-                    }
-                }
-            });
-        });
-
-        // Counter Animation
-        const counters = document.querySelectorAll('.counter');
-        const speed = 200;
-
-        function animateCounters() {
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                const increment = target / speed;
-
-                if (count < target) {
-                    counter.innerText = Math.ceil(count + increment);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
-
-        // Intersection Observer for Animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate');
-                    
-                    // Start counters when stats section is visible
-                    if (entry.target.id === 'stats') {
-                        animateCounters();
-                    }
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Observe all sections
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
-
-        // Form Submission
-        const forms = document.querySelectorAll('form');
-        forms.forEach(form => {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                alert('Obrigado por sua mensagem! Entraremos em contato em breve.');
-                form.reset();
-            });
-        });
-    </script>
 </body>
 </html>
