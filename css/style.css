@@ -1338,4 +1338,47 @@ footer {
     .impact-card {
         max-width: 100%;
     }
+    .materials-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .materials-table th,
+    .materials-table td {
+        min-width: 150px;
+        white-space: normal;
+    }
+    
+    .materials-table tr {
+        display: table-row;
+    }
+    
+
+    .materials-table th:nth-child(1):nth-last-child(2),
+    .materials-table td:nth-child(1):nth-last-child(2) {
+        min-width: 120px;
+    }
+    
+    .materials-table th:nth-child(2):nth-last-child(1),
+    .materials-table td:nth-child(2):nth-last-child(1) {
+        min-width: 180px;
+    }
+    
+
+    .materials-table th:nth-child(1):nth-last-child(3),
+    .materials-table td:nth-child(1):nth-last-child(3) {
+        min-width: 100px;
+    }
+    
+    .materials-table th:nth-child(2):nth-last-child(2),
+    .materials-table td:nth-child(2):nth-last-child(2) {
+        min-width: 120px;
+    }
+    
+    .materials-table th:nth-child(3):nth-last-child(1),
+    .materials-table td:nth-child(3):nth-last-child(1) {
+        min-width: 150px;
+    }
 }
