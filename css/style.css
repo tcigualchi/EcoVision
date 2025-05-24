@@ -899,3 +899,416 @@ footer {
         font-size: 0.9rem;
     }
 }
+
+/* Estilos adicionados dos HTMLs */
+/* Estilos de solucoes.html */
+.recycling-guide {
+    padding: 80px 0;
+}
+
+.guide-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    margin-bottom: 40px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.guide-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.guide-icon {
+    font-size: 2.5rem;
+    color: #2ecc71;
+    margin-bottom: 20px;
+}
+
+.guide-title {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.guide-description {
+    color: #7f8c8d;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.tips-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.tips-list li {
+    padding: 8px 0;
+    position: relative;
+    padding-left: 30px;
+}
+
+.tips-list li:before {
+    content: "\f058";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #2ecc71;
+    position: absolute;
+    left: 0;
+}
+
+.process-steps {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.process-title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.step {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.step-number {
+    background: #2ecc71;
+    color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    flex-shrink: 0;
+    font-size: 0.9rem;
+}
+
+.step-content {
+    flex-grow: 1;
+}
+
+.materials-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.materials-table th, .materials-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.materials-table th {
+    background-color: #f2f2f2;
+    color: #2c3e50;
+}
+
+.materials-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.materials-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.recycling-locations {
+    margin-top: 30px;
+}
+
+.location-card {
+    background: #f5f5f5;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+/* Estilos de inovacao.html */
+.ai-innovation {
+    padding: 80px 0;
+}
+
+.ai-container {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    padding: 40px;
+    margin-bottom: 40px;
+}
+
+.ai-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.ai-title {
+    font-size: 2.2rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.ai-subtitle {
+    color: #7f8c8d;
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.ai-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.feature-card {
+    flex: 1 1 300px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 25px;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    color: #2ecc71;
+    margin-bottom: 15px;
+}
+
+.feature-title {
+    font-size: 1.3rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.feature-description {
+    color: #7f8c8d;
+    line-height: 1.6;
+}
+
+.disclaimer {
+    background: #fff8e1;
+    border-left: 4px solid #ffc107;
+    padding: 20px;
+    margin: 30px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.disclaimer-title {
+    color: #ff8f00;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.disclaimer-title i {
+    margin-right: 10px;
+}
+
+.how-it-works {
+    margin-top: 50px;
+}
+
+.tech-used {
+    background: #f5f5f5;
+    padding: 30px;
+    border-radius: 8px;
+    margin-top: 40px;
+}
+
+.tech-title {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.tech-description {
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.tech-logo {
+    max-width: 200px;
+    display: block;
+    margin: 20px auto;
+}
+
+@media (max-width: 768px) {
+    .ai-features {
+        flex-direction: column;
+    }
+    
+    .feature-card {
+        flex: 1 1 auto;
+    }
+}
+
+/* Estilos de impactos.html */
+.impact-section {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+}
+
+.impact-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.impact-title {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.impact-subtitle {
+    color: #7f8c8d;
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.impact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.impact-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.impact-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.impact-card-header {
+    padding: 25px;
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    color: white;
+    position: relative;
+}
+
+.impact-card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.impact-card-title {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.impact-card-body {
+    padding: 25px;
+}
+
+.impact-stat {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.stat-icon {
+    font-size: 1.5rem;
+    color: #2ecc71;
+    margin-right: 15px;
+    min-width: 30px;
+    text-align: center;
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-value {
+    font-weight: 700;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.stat-label {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.impact-chart-container {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    margin-top: 50px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.chart-title {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+.chart-description {
+    text-align: center;
+    color: #7f8c8d;
+    max-width: 700px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+}
+
+.impact-cta {
+    text-align: center;
+    margin-top: 60px;
+    padding: 40px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    border-radius: 12px;
+    color: white;
+}
+
+.cta-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.cta-text {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 768px) {
+    .impact-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .impact-card {
+        max-width: 100%;
+    }
+}
