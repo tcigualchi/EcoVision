@@ -257,6 +257,9 @@ async function startWebcam() {
   try {
     clearResults();
 
+    // Forçar o navegador a pedir permissão primeiro
+    await navigator.mediaDevices.getUserMedia({ video: true });
+
     const devices = await navigator.mediaDevices.enumerateDevices();
     const videoDevices = devices.filter(device => device.kind === 'videoinput');
 
@@ -311,9 +314,10 @@ async function startWebcam() {
     window.requestAnimationFrame(webcamLoop);
   } catch (error) {
     console.error("Erro ao iniciar webcam:", error);
-    throw error;
+    alert("Erro ao iniciar webcam: " + error.message);
   }
 }
+
 
 async function webcamLoop() {
   try {
