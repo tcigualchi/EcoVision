@@ -395,6 +395,10 @@
     </div>
 </footer>
 
+ <script src="js/tec.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+
     <script>
         // Mobile Menu Toggle
         const menuToggle = document.querySelector('.menu-toggle');
@@ -436,48 +440,6 @@
             });
         });
 
-        // Counter Animation
-        const counters = document.querySelectorAll('.counter');
-        const speed = 200;
-
-        function animateCounters() {
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                const increment = target / speed;
-
-                if (count < target) {
-                    counter.innerText = Math.ceil(count + increment);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
-
-        // Intersection Observer for Animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate');
-                    
-                    // Start counters when stats section is visible
-                    if (entry.target.id === 'stats') {
-                        animateCounters();
-                    }
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Observe all sections
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
-
         // Form Submission
         const forms = document.querySelectorAll('form');
         forms.forEach(form => {
@@ -488,6 +450,5 @@
             });
         });
     </script>
-
 </body>
 </html>
