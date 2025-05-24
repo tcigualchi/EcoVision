@@ -272,9 +272,18 @@ async function startWebcam() {
     
     await appState.webcam.setup(constraints);
     await appState.webcam.play();
+
+    const stream = appState.webcam.webcam?.srcObject;
+      if (stream) {
+        appState.stream = stream;
+        appState.track = stream.getVideoTracks()[0];
+      } else {
+        console.warn("Stream não disponível após setup");
+      }
+
     
     // Armazenar a stream para controle posterior
-    appState.stream = appState.webcam.video.srcObject;
+    appState.stream = appState.webcam.canvas?.srcObject || null;
     appState.track = appState.stream.getVideoTracks()[0];
     
     appState.isWebcamActive = true;
