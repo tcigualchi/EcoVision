@@ -263,7 +263,6 @@ async function startWebcam() {
     let selectedDeviceId = null;
 
     if (videoDevices.length > 1) {
-      // Se houver mais de uma câmera, escolher pela heurística
       const preferred = appState.currentCamera === 'environment'
         ? videoDevices.find(d => d.label.toLowerCase().includes('back'))
         : videoDevices.find(d => d.label.toLowerCase().includes('front'));
@@ -289,15 +288,13 @@ async function startWebcam() {
 
     const flip = appState.currentCamera === 'user';
     appState.webcam = new tmImage.Webcam(400, 400, flip);
-
     await appState.webcam.setup(constraints);
     await appState.webcam.play();
 
     const stream = appState.webcam.webcam?.srcObject;
     if (stream) {
       appState.stream = stream;
-      const tracks = stream.getVideoTracks();
-      appState.track = tracks[0] || null;
+      appState.track = stream.getVideoTracks()[0] || null;
     } else {
       console.warn("Stream não disponível após setup.");
       appState.stream = null;
@@ -317,7 +314,6 @@ async function startWebcam() {
     throw error;
   }
 }
-
 
 async function webcamLoop() {
   try {
